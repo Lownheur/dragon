@@ -4,6 +4,7 @@ import { EvenementService } from './evenement.service';
 import { ObjectifService } from './objectif.service';
 import { DisciplineService } from './discipline.service';
 import { ProfilService } from './profil.service';
+import { SportRouteService, RunningRoute } from './sport-route.service';
 import { EvenementType } from '../models/evenement.model';
 import { DisciplineType } from '../models/discipline.model';
 import { ObjectifPriority } from '../models/objectif.model';
@@ -21,6 +22,7 @@ export class GrokCommandService {
   private readonly objectifs = inject(ObjectifService);
   private readonly disciplines = inject(DisciplineService);
   private readonly profil = inject(ProfilService);
+  private readonly sportRoute = inject(SportRouteService);
 
   private readonly systemPrompt = `Tu es l'assistant IA de Dragon Life OS. Tu es le CONTRÔLEUR CENTRAL de l'application. Tu ne réponds pas juste — tu AGIS.
 
@@ -36,6 +38,8 @@ Types de commandes disponibles:
 - CREATE_DISCIPLINE: crée une discipline
 - UPDATE_PROFIL: met à jour le profil utilisateur
 - SCHEDULE_ROUTINE: planifie des événements récurrents (ex: "courir 3x par semaine")
+- GET_SPORT_SUGGESTION:获取运动建议和跑步路线 (demande du sport + position GPS → itinéraire course)
+- GET_FOOD_SUGGESTION:获取饮食建议 (suggère quoi manger + crée événement courses)
 - RESPOND: réponse simple sans action (bonjour, merci, conversation)
 
 RÈGLES:
@@ -66,13 +70,97 @@ Exemples:
 - "je pèse maintenant 80kg"
 → {"command":"UPDATE_PROFIL","data":{"poids":80},"message":"⚖️ Poids mis à jour à 80kg !"}
 
+- "je veux faire du sport"
+→ {"command":"GET_SPORT_SUGGESTION","data":{"sportType":"running","distanceKm":5,"routeType":"loop"},"message":"🏃‍♂️ Voici une suggestion de course pour toi !"}
+
+- "qu'est-ce que je devrais manger?"
+→ {"command":"GET_FOOD_SUGGESTION","data":{"mealType":"balanced","mealTime":"lunch","calories":2000},"message":"🍽️ Voici une suggestion de repas équilibré !"}
+
 - "merci"
 → {"command":"RESPOND","data":{},"message":"Avec plaisir ! 💪"}`;
 
   async execute(userMessage: string): Promise<string> {
     const { command, data, message } = await this.sendCommand(userMessage);
+
+    // Handle special commands that need additional data (route, food, etc.)
+    if (command === 'GET_SPORT_SUGGESTION') {
+      const sportData = await this.getSportSuggestion(data);
+      return message + '\n\n' + sportData;
+    }
+    if (command === 'GET_FOOD_SUGGESTION') {
+      const foodData = await this.getFoodSuggestion(data);
+      return message + '\n\n' + foodData;
+    }
+
     await this.runCommand(command, data);
     return message;
+  }
+
+  private async getSportSuggestion(data: Record<string, unknown>): Promise<string> {
+    const sportType = (data['sportType'] as string) || 'running';
+    const distanceKm = (data['distanceKm'] as number) || 5;
+    const routeType = (data['routeType'] as string) || 'loop';
+
+    try {
+      const position = await this.sportRoute.getCurrentPosition();
+      const route = await this.sportRoute.getRunningRoute(position, distanceKm, routeType as 'out_and_back' | 'loop');
+      return this.sportRoute.formatRouteInstructions(route);
+    } catch (err) {
+      const suggestions = this.sportRoute.getDefaultSuggestions();
+      const suggestion = suggestions.find(s => s.type === sportType) || suggestions[0];
+      return `🏃‍♂️ ${suggestion.name}\n⏱️ ${suggestion.duration}min | 💪 ${suggestion.intensity}\n${suggestion.description}\n\n⚠️ Impossible d'obtenir un itinéraire (géolocalisation indisponible)`;
+    }
+  }
+
+  private async getFoodSuggestion(data: Record<string, unknown>): Promise<string> {
+    const mealType = (data['mealType'] as string) || 'balanced';
+    const calories = (data['calories'] as number) || 2000;
+
+    // Generate meal suggestions based on type
+    const meals: Record<string, { name: string; foods: string[]; calories: number }[]> = {
+      breakfast: [
+        { name: 'Petit-déjeuner protéiné', foods: ['🥚 3 œufs brouillés', '🍞 2 tranches pain complet', '🥛 1 verre lait', '🍌 1 banane'], calories: 450 },
+        { name: 'Porridge能量', foods: ['🥣 100g flocons avoine', '🥛 250ml lait', '🍯 1 c.à.s miel', '🫐 50g myrtilles'], calories: 400 },
+      ],
+      lunch: [
+        { name: 'Salade composée', foods: ['🥗 200g salade verte', '🍗 150g poulet grillé', '🥕 100g carrots rapées', '🫘 50g pois chiches', '🌻 1 c.à.s huile olive'], calories: 550 },
+        { name: 'Bowl riz poisson', foods: ['🍚 200g riz basmati', '🐟 150g poisson blanc', '🥦 100g broccoli', '🥑 50g avocat'], calories: 580 },
+      ],
+      dinner: [
+        { name: 'Dîner léger protéiné', foods: ['🍗 200g poulet rôti', '🥔 150g patate douce', '🥦 100g choux fleur', '🥗 salad'], calories: 500 },
+        { name: 'Poisson + légumes', foods: ['🐟 200g poisson gras', '🥕 200g légumes variés', '🍚 100g riz'], calories: 520 },
+      ],
+      snack: [
+        { name: 'En-cas protéiné', foods: ['🥜 30g noix混合', '🧀 1 fromage blanc 0%'], calories: 180 },
+        { name: 'Fruit + oléagineux', foods: ['🍎 1 pomme', '🥜 20g amandes'], calories: 150 },
+      ],
+    };
+
+    const type = (data['mealTime'] as string) || 'lunch';
+    const typeMeals = meals[type] || meals['lunch'];
+    const meal = typeMeals[Math.floor(Math.random() * typeMeals.length)];
+
+    let text = `🍽️ **${meal.name}** (~${meal.calories} kcal)\n\n`;
+    for (const food of meal.foods) {
+      text += `${food}\n`;
+    }
+    text += `\n💡 Objectif: ~${calories} kcal/jour`;
+
+    // Create shopping event for ingredients
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const dateStr = tomorrow.toISOString().split('T')[0];
+    await this.evenements.create({
+      title: 'Courses: ' + meal.name,
+      description: meal.foods.join(', '),
+      type: 'food',
+      startTime: `${dateStr}T10:00:00`,
+      endTime: `${dateStr}T11:00:00`,
+      allDay: false,
+      color: '#2ecc71',
+    });
+
+    return text + '\n\n✅ Événement "Courses" ajouté pour demain !';
   }
 
   private async sendCommand(message: string): Promise<GrokCommand> {
