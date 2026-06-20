@@ -1,6 +1,6 @@
 <div class="auth-form">
-  <h2 class="auth-form__title">Créer un compte</h2>
-  <p class="auth-form__sub">C'est gratuit et prend 30 secondes.</p>
+  <h2 class="auth-form__title">{{ t('auth.register') }}</h2>
+  <p class="auth-form__sub">{{ t('auth.registerSub') || "C'est gratuit et prend 30 secondes." }}</p>
 
   @if (errorMessage()) {
     <div class="auth-form__error">{{ errorMessage() }}</div>
@@ -8,7 +8,7 @@
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-form__fields">
     <label class="field">
-      <span class="field__label">Email</span>
+      <span class="field__label">{{ t('auth.email') }}</span>
       <input
         id="register-email"
         class="field__input"
@@ -22,7 +22,7 @@
     </label>
 
     <label class="field">
-      <span class="field__label">Mot de passe</span>
+      <span class="field__label">{{ t('auth.password') }}</span>
       <input
         id="register-password"
         class="field__input"
@@ -36,7 +36,7 @@
     </label>
 
     <label class="field">
-      <span class="field__label">Confirmer le mot de passe</span>
+      <span class="field__label">{{ t('auth.confirmPassword') || 'Confirmer le mot de passe' }}</span>
       <input
         id="register-confirm"
         class="field__input"
@@ -50,11 +50,11 @@
     </label>
 
     <button type="submit" class="auth-form__submit" [disabled]="isSubmitting()">
-      {{ isSubmitting() ? 'Création...' : 'Créer mon compte' }}
+      {{ isSubmitting() ? (t('auth.creating') || 'Création...') : (t('auth.createCta') || 'Créer mon compte') }}
     </button>
   </form>
 
   <p class="auth-form__footer">
-    Déjà un compte ? <a routerLink="/auth/login" class="auth-form__link">Se connecter</a>
+    {{ t('auth.hasAccount') }} <a routerLink="/auth/login" class="auth-form__link">{{ t('auth.loginLink') }}</a>
   </p>
 </div>

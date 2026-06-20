@@ -5,7 +5,8 @@
   "header": {
     "openMenu": "Open menu",
     "switchTheme": "Switch theme",
-    "openChat": "Open Grok chat"
+    "openChat": "Open Grok chat",
+    "switchLang": "Switch language"
   },
   "sidebar": {
     "close": "Close menu",
@@ -31,11 +32,19 @@
     "logout": "Logout",
     "email": "Email",
     "password": "Password",
+    "confirmPassword": "Confirm Password",
     "submit": "Sign in",
+    "loggingIn": "Signing in...",
+    "creating": "Creating account...",
+    "createCta": "Create my account",
+    "registerSub": "It's free and takes 30 seconds.",
+    "welcomeBack": "Welcome back.",
     "noAccount": "No account yet?",
     "hasAccount": "Already have an account?",
     "createAccount": "Create account",
-    "loginLink": "Sign in"
+    "loginLink": "Sign in",
+    "error": "Login error.",
+    "registerError": "Registration error."
   },
   "hero": {
     "title": "🐉 Dragon Life OS",

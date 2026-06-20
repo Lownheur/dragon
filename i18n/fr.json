@@ -149,7 +149,17 @@
     "noAccount": "Pas encore de compte ?",
     "hasAccount": "Déjà un compte ?",
     "signUp": "S'inscrire",
-    "signIn": "Se connecter"
+    "signIn": "Se connecter",
+    "welcomeBack": "Content de vous revoir.",
+    "registerSub": "C'est gratuit et prend 30 secondes.",
+    "confirmPassword": "Confirmer le mot de passe",
+    "loggingIn": "Connexion...",
+    "submit": "Se connecter",
+    "createAccount": "Créer un compte",
+    "createCta": "Créer mon compte",
+    "loginLink": "Se connecter",
+    "registerError": "Erreur lors de l'inscription.",
+    "error": "Erreur de connexion."
   },
   "common": {
     "save": "Sauvegarder",

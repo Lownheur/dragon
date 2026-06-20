@@ -8,6 +8,9 @@
   <span class="header__logo">{{ t('app.name') }}</span>
 
   <div class="header__actions">
+    <button class="header__lang-btn" (click)="onToggleLocale()" [attr.aria-label]="t('header.switchLang')">
+      {{ locale().toUpperCase() }}
+    </button>
     <button class="header__theme-btn" (click)="onToggleTheme()" [attr.aria-label]="t('header.switchTheme')">
       @if (theme() === 'light') {
         <span>🌙</span>

@@ -149,7 +149,17 @@
     "noAccount": "No account yet?",
     "hasAccount": "Already have an account?",
     "signUp": "Sign up",
-    "signIn": "Sign in"
+    "signIn": "Sign in",
+    "welcomeBack": "Good to see you back.",
+    "registerSub": "It's free and takes 30 seconds.",
+    "confirmPassword": "Confirm password",
+    "loggingIn": "Logging in...",
+    "submit": "Sign in",
+    "createAccount": "Create an account",
+    "createCta": "Create my account",
+    "loginLink": "Sign in",
+    "registerError": "Error during registration.",
+    "error": "Login error."
   },
   "common": {
     "save": "Save",

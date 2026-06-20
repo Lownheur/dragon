@@ -21,6 +21,10 @@ export class DashboardHeaderComponent {
     return this.themeService.theme;
   }
 
+  get locale() {
+    return this.i18n.locale;
+  }
+
   t(key: string) {
     return this.i18n.t(key);
   }
@@ -35,5 +39,9 @@ export class DashboardHeaderComponent {
 
   onToggleTheme(): void {
     this.themeService.toggle();
+  }
+
+  onToggleLocale(): void {
+    this.i18n.toggle();
   }
 }

@@ -3,10 +3,10 @@
     <div class="hero__logo">Dragon</div>
     <div class="hero__nav-actions">
       @if (authService.isAuthenticated()) {
-        <a routerLink="/app/dashboard" class="btn-link btn-link--primary">Dashboard</a>
+        <a routerLink="/app/dashboard" class="btn-link btn-link--primary">{{ t('hero.dashboard') || 'Dashboard' }}</a>
       } @else {
-        <a routerLink="/auth/login" class="btn-link">Connexion</a>
-        <a routerLink="/auth/register" class="btn-link btn-link--primary">S'inscrire</a>
+        <a routerLink="/auth/login" class="btn-link">{{ t('auth.login') }}</a>
+        <a routerLink="/auth/register" class="btn-link btn-link--primary">{{ t('hero.signup') || "S'inscrire" }}</a>
       }
     </div>
   </nav>
@@ -18,10 +18,10 @@
     </p>
     <div class="hero__actions">
       @if (authService.isAuthenticated()) {
-        <a routerLink="/app/dashboard" class="btn-primary">Accéder</a>
+        <a routerLink="/app/dashboard" class="btn-primary">{{ t('hero.access') || 'Accéder' }}</a>
       } @else {
-        <a routerLink="/auth/register" class="btn-primary">Commencer gratuitement</a>
-        <a routerLink="/auth/login" class="btn-ghost">Se connecter</a>
+        <a routerLink="/auth/register" class="btn-primary">{{ t('hero.cta') }}</a>
+        <a routerLink="/auth/login" class="btn-ghost">{{ t('hero.login') }}</a>
       }
     </div>
   </main>
