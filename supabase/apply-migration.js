@@ -1,21 +1,35 @@
 /**
  * Dragon Life OS — Supabase SQL Migration Runner
- * Usage: node supabase/apply-migration.js
+ * =============================================
+ * Uses Supabase Management API via a Personal Access Token.
+ *
+ * How to get a Personal Access Token:
+ *   1. Go to https://app.supabase.com → Account Settings → Access Tokens
+ *   2. Create a new personal access token
+ *   3. Run: node supabase/apply-migration.js <your-token>
+ *      Or set it in .env as SUPABASE_ACCESS_TOKEN=sbp_...
+ *
+ * Alternative (manual):
+ *   Copy-paste the content of schema.sql into the Supabase SQL Editor
+ *   Dashboard → Your Project → SQL Editor → New Query → Paste & Run
  */
 
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-const SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const SUPABASE_URL = process.env.SUPABASE_URL || 'https://rbkkibtauyucbaytnzno.supabase.co';
+const args = process.argv.slice(2);
+const ACCESS_TOKEN = args[0] || process.env.SUPABASE_ACCESS_TOKEN;
+const projectRef = 'rbkkibtauyucbaytnzno';
 
-if (!SERVICE_ROLE_KEY) {
-  console.error('❌  SUPABASE_SERVICE_ROLE_KEY not found in .env');
+if (!ACCESS_TOKEN) {
+  console.error('❌  Usage: node apply-migration.js <your-personal-access-token>');
+  console.error('   Or set SUPABASE_ACCESS_TOKEN in .env');
+  console.error('');
+  console.error('   Get a token at: https://app.supabase.com → Account Settings → Access Tokens');
   process.exit(1);
 }
 
-const projectRef = 'rbkkibtauyucbaytnzno';
 const sqlPath = path.join(__dirname, 'schema.sql');
 const sql = fs.readFileSync(sqlPath, 'utf8');
 
@@ -28,23 +42,30 @@ const options = {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${SERVICE_ROLE_KEY}`,
-    'apikey': SERVICE_ROLE_KEY,
+    'Authorization': `Bearer ${ACCESS_TOKEN}`,
+    'apikey': ACCESS_TOKEN,
     'Content-Length': Buffer.byteLength(postData),
   },
 };
 
 console.log('🚀 Applying Dragon Life OS schema to Supabase...');
+console.log(`   Project: ${projectRef}`);
 
 const req = https.request(options, (res) => {
   let body = '';
   res.on('data', (chunk) => { body += chunk; });
   res.on('end', () => {
     if (res.statusCode >= 200 && res.statusCode < 300) {
-      console.log('✅ Migration applied successfully!');
+      console.log('✅  Migration applied successfully!');
+      console.log('    All tables created (or already exist).');
     } else {
       console.error(`❌  Migration failed (HTTP ${res.statusCode}):`);
-      console.error(body);
+      try {
+        const parsed = JSON.parse(body);
+        console.error('   ', parsed.message || body);
+      } catch {
+        console.error('   ', body.substring(0, 500));
+      }
       process.exit(1);
     }
   });
