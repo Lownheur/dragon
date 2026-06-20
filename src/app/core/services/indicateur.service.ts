@@ -1,7 +1,8 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { SupabaseService } from './supabase.service';
 import { AuthService } from './auth.service';
-import { Indicateur, INDICATEUR_DEFAULTS } from '../models/indicateur.model';
+import { Indicateur } from '../models/indicateur.model';
+import { toCamelCase } from '../utils/db-mapper.util';
 
 @Injectable({ providedIn: 'root' })
 export class IndicateurService {
@@ -24,7 +25,7 @@ export class IndicateurService {
 
     if (error && error.code !== 'PGRST116') { console.error(error); return null; }
 
-    const indicateur = data as Indicateur | null;
+    const indicateur = data ? toCamelCase<Indicateur>(data as Record<string, unknown>) : null;
     this._today.set(indicateur);
     return indicateur;
   }
@@ -65,7 +66,7 @@ export class IndicateurService {
         .select()
         .single();
       if (error) { console.error(error); return null; }
-      data = updated as Indicateur;
+      data = updated ? toCamelCase<Indicateur>(updated as Record<string, unknown>) : null;
     } else {
       // Insert
       const { data: inserted, error } = await this.supabase.client
@@ -74,7 +75,7 @@ export class IndicateurService {
         .select()
         .single();
       if (error) { console.error(error); return null; }
-      data = inserted as Indicateur;
+      data = inserted ? toCamelCase<Indicateur>(inserted as Record<string, unknown>) : null;
     }
 
     this._today.set(data);
