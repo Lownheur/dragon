@@ -1,5 +1,23 @@
 # Dragon Life OS — Session Log
 
+## 2026-06-20 — Session 7 : i18n Integration + Git Fix ✅
+
+### Ce qui a été fait
+- **I18nService** mis à jour avec HttpClient (au lieu de dynamic import)
+- **Sidebar** utilise i18n : navigation labels traduits, brand, logout
+- **Header** utilise i18n : logo, theme toggle aria-label, chat toggle aria-label
+- **Chat** utilise i18n : title, clear button, empty message, error message, placeholder
+- Commits dans dragon.git: `3efe1be` (force-push, réécrit l'historique)
+- Build: ✅ successful
+
+### Prochaines étapes
+1. **Supabase schema** — exécuter `supabase/schema.sql` dans le SQL Editor de Supabase
+2. **Déployer** — Cloudflare Pages
+3. **Intégrer i18n dans les vues** — EDT, Objectifs, Journal, Personnage
+4. **Tests E2E** — exécuter `npm run test:e2e`
+
+---
+
 ## 2026-06-20 — Session 6 : E2E Tests + Playwright ✅
 
 ### Ce qui a été fait
