@@ -1,5 +1,28 @@
 # Dragon Life OS — Session Log
 
+## 2026-06-20 — Session 8 : Grok AI Controller + i18n Fixes ✅
+
+### Ce qui a été fait
+- **GrokCommandService** créé : Grok est maintenant le CONTRÔLEUR CENTRAL de l'app
+  * COMMANDES: CREATE_EVENT, SCHEDULE_ROUTINE, CREATE_OBJECTIF, UPDATE_OBJECTIF,
+    COMPLETE_OBJECTIF, UPDATE_PROFIL, DELETE_EVENT, CREATE_DISCIPLINE
+  * ChatComponent utilise GrokCommandService au lieu de GrokService brut
+  * Parsing intelligent des dates ("demain 10h", "aujourdhui")
+  * Couleurs par type d'événement
+  * SCHEDULE_ROUTINE planifie X événements/semaine sur jours spread
+- **i18n ObjectifsComponent** corrigé : keys priorités, status, stats, form
+- **i18n JournalComponent** : injecté I18nService, toutes les labels traduites
+- Commits: `89915a1` (GrokCommandService), `890c365` (i18n fixes), `d827198` (Journal i18n)
+- Build: ✅ OK
+
+### Prochaines étapes
+1. **Supabase schema** — exécuter `supabase/schema.sql` dans le SQL Editor de Supabase
+2. **Tests E2E** — exécuter `npm run test:e2e`
+3. **Déployer** — Cloudflare Pages
+4. **i18n CharacterSheet** — vérifier que la feuille de perso utilise i18n
+
+---
+
 ## 2026-06-20 — Session 7 : i18n Integration + Git Fix ✅
 
 ### Ce qui a été fait
