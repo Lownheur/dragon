@@ -13,7 +13,7 @@
 ### Prochaines étapes
 1. **Supabase schema** — exécuter `supabase/schema.sql` dans le SQL Editor de Supabase
 2. **Déployer** — Cloudflare Pages
-3. **Intégrer i18n dans les vues** — EDT, Objectifs, Journal, Personnage
+3. **Intégrer i18n dans les vues restantes** — Objectifs, Journal, Personnage
 4. **Tests E2E** — exécuter `npm run test:e2e`
 
 ---
