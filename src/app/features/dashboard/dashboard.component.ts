@@ -1,25 +1,19 @@
-import { Component, signal } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { RouterOutlet } from "@angular/router";
-import { DashboardHeaderComponent } from "./components/header/header.component";
-import { DashboardSidebarComponent } from "./components/sidebar/sidebar.component";
-import { ChatComponent } from "../chat/chat.component";
+import { RouterLink } from "@angular/router";
+import { I18nService } from "../../core/services/i18n.service";
 
 @Component({
   selector: "app-dashboard",
   standalone: true,
-  imports: [CommonModule, RouterOutlet, DashboardHeaderComponent, DashboardSidebarComponent, ChatComponent],
+  imports: [CommonModule, RouterLink],
   templateUrl: "./dashboard.component.html",
   styleUrl: "./dashboard.component.scss",
 })
 export class DashboardComponent {
-  readonly isSidebarOpen = signal(false);
+  readonly i18n = inject(I18nService);
 
-  toggleSidebar(): void {
-    this.isSidebarOpen.update((v) => !v);
-  }
-
-  closeSidebar(): void {
-    this.isSidebarOpen.set(false);
+  t(key: string): string {
+    return this.i18n.t(key);
   }
 }

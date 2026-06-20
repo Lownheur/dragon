@@ -1,4 +1,22 @@
-<app-dashboard-header (toggleSidebar)="toggleSidebar()" />
-<app-dashboard-sidebar [isOpen]="isSidebarOpen()" (close)="closeSidebar()" />
-<main class="dashboard-content"><router-outlet /></main>
-<app-chat class="dashboard-chat" />
+<!-- Dashboard content — header/sidebar are in MainLayoutComponent -->
+<section class="dashboard-home">
+  <h1 class="dashboard-home__title">{{ t('app.tagline') }}</h1>
+  <div class="dashboard-home__cards">
+    <a routerLink="edt" class="dash-card">
+      <span class="dash-card__icon">📅</span>
+      <span class="dash-card__label">{{ t('nav.edt') }}</span>
+    </a>
+    <a routerLink="objectifs" class="dash-card">
+      <span class="dash-card__icon">🎯</span>
+      <span class="dash-card__label">{{ t('nav.objectifs') }}</span>
+    </a>
+    <a routerLink="journal" class="dash-card">
+      <span class="dash-card__icon">📔</span>
+      <span class="dash-card__label">{{ t('nav.journal') }}</span>
+    </a>
+    <a routerLink="feuille" class="dash-card">
+      <span class="dash-card__icon">🧙</span>
+      <span class="dash-card__label">{{ t('nav.personnage') }}</span>
+    </a>
+  </div>
+</section>
