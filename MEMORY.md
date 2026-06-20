@@ -1,5 +1,46 @@
 # Dragon Life OS — Session Log
 
+## 2026-06-20 — Session 10 : Sport Route + Food Suggestions 🏃‍♂️🍽️
+
+### Ce qui a été fait
+
+**1. SportRouteService créé** (`src/app/core/services/sport-route.service.ts`)
+- Géolocalisation via `navigator.geolocation`
+- Itinéraire course via OSRM (`router.project-osrm.org`)
+- `getRunningRoute(start, distanceKm, type)` → retourne route avec steps
+- `formatRouteInstructions(route)` → texte lisible
+- `getDefaultSuggestions()` → 7 sports (running, handstand, yoga, gym, swimming, cycling, stretching)
+
+**2. GrokCommandService enrichi**
+- Nouvelles commandes: `GET_SPORT_SUGGESTION` et `GET_FOOD_SUGGESTION`
+- `getSportSuggestion()`:获取位置→OSRM路由 或 fallback suggestions
+- `getFoodSuggestion()`: repas suggérés + création événement "Courses" demain
+- Exemples dans systemPrompt pour les new commands
+
+**3. Tests E2E: 10/10 passed ✅**
+
+### Commits
+- `a0c0e97` feat(sport): SportRouteService - itinéraire course + suggestions sport
+
+### État actuel
+- 4 vues: EDT ✅, Objectifs ✅, Journal ✅, Feuille de Perso ✅
+- Grok service: intégré ✅ + commands sport/food
+- Chat flottant: accessible depuis toutes les pages auth ✅
+- Dark/light theme: toggle dans header ✅
+- i18n FR/EN: intégré ✅
+- Sport routes: OSRM géolocation ✅
+- Food suggestions + shopping event ✅
+- Tests E2E: 10/10 passed ✅
+- **Supabase schema: ⚠️ pas encore exécuté** (requiert token Supabase)
+
+### Prochaines étapes
+1. **Supabase schema** — exécuter `supabase/schema.sql` (besoin token Supabase)
+2. **Déployer** — Cloudflare Pages (push → auto-deploy)
+3. **Map display** — afficher les routes sur une carte (Leaflet?)
+4. **Plus de features sport** — suivi des séances, stats
+
+---
+
 ## 2026-06-20 — Session 9 : Critical Bug Fixes 🔴
 
 ### 🐛 Bugs critiques corrigés
