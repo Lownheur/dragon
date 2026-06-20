@@ -95,7 +95,7 @@ export class AuthService {
   /** déconnexion */
   async signOut(): Promise<void> {
     await this.supabaseService.client.auth.signOut();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth/login']);
   }
 
   /** traduit les erreurs supabase en messages français */

@@ -63,7 +63,7 @@ export class RegisterComponent {
     const { email, password } = this.form.value;
     const result = await this.authService.signUp(email, password);
     if (result.success) {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/app/dashboard']);
     } else {
       this.errorMessage.set(result.error ?? "Erreur lors de l'inscription.");
     }

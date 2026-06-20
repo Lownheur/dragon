@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { PersonnageService } from '../../core/services/personnage.service';
 import { DisciplineService } from '../../core/services/discipline.service';
 import { ProfilService } from '../../core/services/profil.service';
+import { I18nService } from '../../core/services/i18n.service';
 import { Personnage, xpForLevel } from '../../core/models/personnage.model';
 import { Discipline } from '../../core/models/discipline.model';
 import { Profil } from '../../core/models/profil.model';
@@ -19,6 +20,7 @@ export class CharacterSheetComponent implements OnInit {
   private readonly personnageService = inject(PersonnageService);
   private readonly disciplineService = inject(DisciplineService);
   private readonly profilService = inject(ProfilService);
+  readonly i18n = inject(I18nService);
 
   readonly personnage = this.personnageService.personnage;
   readonly disciplines = this.disciplineService.disciplines;
@@ -26,6 +28,10 @@ export class CharacterSheetComponent implements OnInit {
 
   readonly isEditing = signal(false);
   readonly editForm = signal<Partial<Profil>>({});
+
+  t(key: string): string {
+    return this.i18n.t(key);
+  }
 
   ngOnInit(): void {
     this.personnageService.load();

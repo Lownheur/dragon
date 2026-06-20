@@ -2,20 +2,19 @@ import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
-  // redirect racine vers la hero page
+  // Page d'accueil Hero (publique)
   {
     path: '',
     pathMatch: 'full',
     redirectTo: 'hero',
   },
-  // page d'accueil Hero (publique)
   {
     path: 'hero',
     loadComponent: () => import('./features/hero/hero.component').then((m) => m.HeroComponent),
   },
-  // routes auth — auth-layout
+  // Routes auth — auth-layout
   {
-    path: '',
+    path: 'auth',
     loadComponent: () =>
       import('./layouts/auth-layout/auth-layout.component').then((m) => m.AuthLayoutComponent),
     children: [
@@ -29,15 +28,25 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/auth/register/register.component').then((m) => m.RegisterComponent),
       },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'login',
+      },
     ],
   },
-  // routes app — main-layout (protégées)
+  // Routes app — main-layout (protégées)
   {
-    path: '',
+    path: 'app',
     loadComponent: () =>
       import('./layouts/main-layout/main-layout.component').then((m) => m.MainLayoutComponent),
     canActivate: [authGuard],
     children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'dashboard',
+      },
       {
         path: 'dashboard',
         loadComponent: () =>
@@ -63,13 +72,11 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/character-sheet/character-sheet.component').then((m) => m.CharacterSheetComponent),
       },
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'dashboard',
-      },
     ],
   },
-  // redirects
-  { path: '**', redirectTo: 'hero' },
+  // Catch-all → hero
+  {
+    path: '**',
+    redirectTo: 'hero',
+  },
 ];
