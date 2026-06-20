@@ -2,6 +2,7 @@ import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EvenementService } from '../../core/services/evenement.service';
+import { I18nService } from '../../core/services/i18n.service';
 import { Evenement, EvenementType } from '../../core/models/evenement.model';
 
 interface DaySlot {
@@ -20,6 +21,7 @@ interface DaySlot {
 })
 export class EdtComponent implements OnInit {
   private readonly evenementService = inject(EvenementService);
+  readonly i18n = inject(I18nService);
 
   readonly evenements = this.evenementService.evenements;
   readonly weekSlots = signal<DaySlot[]>([]);
@@ -42,22 +44,34 @@ export class EdtComponent implements OnInit {
   readonly hours = Array.from({ length: 15 }, (_, i) => i + 7); // 7h-21h
   readonly weekDays = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
   readonly dayNames = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
-  readonly types: { value: EvenementType; label: string; color: string }[] = [
-    { value: 'sport', label: 'Sport', color: '#e74c3c' },
-    { value: 'work', label: 'Travail', color: '#3498db' },
-    { value: 'food', label: 'Alimentation', color: '#27ae60' },
-    { value: 'sleep', label: 'Sommeil', color: '#9b59b6' },
-    { value: 'travel', label: 'Trajets', color: '#f39c12' },
-    { value: 'study', label: 'Études', color: '#e67e22' },
-    { value: 'social', label: 'Social', color: '#1abc9c' },
-    { value: 'health', label: 'Santé', color: '#e91e63' },
-    { value: 'other', label: 'Autre', color: '#95a5a6' },
+  readonly types: { value: EvenementType; labelKey: string; color: string }[] = [
+    { value: 'sport', labelKey: 'edt.types.sport', color: '#e74c3c' },
+    { value: 'work', labelKey: 'edt.types.work', color: '#3498db' },
+    { value: 'food', labelKey: 'edt.types.food', color: '#27ae60' },
+    { value: 'sleep', labelKey: 'edt.types.sleep', color: '#9b59b6' },
+    { value: 'travel', labelKey: 'edt.types.travel', color: '#f39c12' },
+    { value: 'study', labelKey: 'edt.types.study', color: '#e67e22' },
+    { value: 'social', labelKey: 'edt.types.social', color: '#1abc9c' },
+    { value: 'health', labelKey: 'edt.types.health', color: '#e91e63' },
+    { value: 'other', labelKey: 'edt.types.other', color: '#95a5a6' },
   ];
 
   currentWeekStart = signal<Date>(this.getMonday(new Date()));
 
   ngOnInit(): void {
     this.buildWeek(this.currentWeekStart());
+  }
+
+  t(key: string): string {
+    return this.i18n.t(key);
+  }
+
+  typeLabel(key: string): string {
+    return this.t(key);
+  }
+
+  private getLocale(): string {
+    return this.i18n.locale() === 'en' ? 'en-US' : 'fr-FR';
   }
 
   getMonday(d: Date): Date {
@@ -191,7 +205,7 @@ export class EdtComponent implements OnInit {
 
   formatTime(iso: string): string {
     const d = new Date(iso);
-    return d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+    return d.toLocaleTimeString(this.getLocale(), { hour: '2-digit', minute: '2-digit' });
   }
 
   formatWeekRange(): string {
@@ -199,7 +213,8 @@ export class EdtComponent implements OnInit {
     const end = new Date(start);
     end.setDate(end.getDate() + 6);
     const opts: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short' };
-    return `${start.toLocaleDateString('fr-FR', opts)} – ${end.toLocaleDateString('fr-FR', { ...opts, year: 'numeric' })}`;
+    const loc = this.getLocale();
+    return `${start.toLocaleDateString(loc, opts)} – ${end.toLocaleDateString(loc, { ...opts, year: 'numeric' })}`;
   }
 
   onTypeChange(): void {
