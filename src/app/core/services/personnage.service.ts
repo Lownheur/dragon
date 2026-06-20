@@ -2,6 +2,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { SupabaseService } from './supabase.service';
 import { AuthService } from './auth.service';
 import { Personnage, xpForLevel } from '../models/personnage.model';
+import { toCamelCase, toSnakeCase } from '../utils/db-mapper.util';
 
 @Injectable({ providedIn: 'root' })
 export class PersonnageService {
@@ -28,18 +29,29 @@ export class PersonnageService {
       return;
     }
 
-    this._personnage.set(data as Personnage);
+    this._personnage.set(toCamelCase<Personnage>(data as Record<string, unknown>));
   }
 
   async create(userId: string): Promise<void> {
     const { data, error } = await this.supabase.client
       .from('personnages')
-      .insert({ user_id: userId, name: 'Dragon', level: 1, xp: 0, xp_to_next_level: xpForLevel(1), total_xp_earned: 0, discipline_xp: {}, streak_days: 0, longest_streak: 0, last_active_date: null })
+      .insert({
+        user_id: userId,
+        name: 'Dragon',
+        level: 1,
+        xp: 0,
+        xp_to_next_level: xpForLevel(1),
+        total_xp_earned: 0,
+        discipline_xp: {},
+        streak_days: 0,
+        longest_streak: 0,
+        last_active_date: null,
+      })
       .select()
       .single();
 
     if (error) { console.error(error); return; }
-    this._personnage.set(data as Personnage);
+    this._personnage.set(toCamelCase<Personnage>(data as Record<string, unknown>));
   }
 
   async addXp(xp: number, disciplineType?: string): Promise<void> {
@@ -51,7 +63,6 @@ export class PersonnageService {
     let newXp = p.xp + xp;
     let newXpToNext = p.xpToNextLevel;
 
-    // Check level up
     while (newXp >= newXpToNext && newLevel < 100) {
       newXp -= newXpToNext;
       newLevel++;
@@ -72,7 +83,7 @@ export class PersonnageService {
 
     await this.supabase.client
       .from('personnages')
-      .update(updates)
+      .update(toSnakeCase(updates as Record<string, unknown>) as Record<string, unknown>)
       .eq('id', p.id);
 
     this._personnage.update(existing => existing ? { ...existing, ...updates } : existing);
@@ -88,7 +99,7 @@ export class PersonnageService {
     let newStreak = p.streakDays;
     let longest = p.longestStreak;
 
-    if (p.lastActiveDate === today) return; // already updated today
+    if (p.lastActiveDate === today) return;
 
     if (p.lastActiveDate === yesterday) {
       newStreak = p.streakDays + 1;
@@ -100,9 +111,19 @@ export class PersonnageService {
 
     await this.supabase.client
       .from('personnages')
-      .update({ streak_days: newStreak, longest_streak: longest, last_active_date: today, updated_at: new Date().toISOString() })
+      .update({
+        streak_days: newStreak,
+        longest_streak: longest,
+        last_active_date: today,
+        updated_at: new Date().toISOString(),
+      })
       .eq('id', p.id);
 
-    this._personnage.update(existing => existing ? { ...existing, streakDays: newStreak, longestStreak: longest, lastActiveDate: today } : existing);
+    this._personnage.update(existing => existing ? {
+      ...existing,
+      streakDays: newStreak,
+      longestStreak: longest,
+      lastActiveDate: today,
+    } : existing);
   }
 }

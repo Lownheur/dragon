@@ -5,6 +5,7 @@ import { ObjectifService } from './objectif.service';
 import { DisciplineService } from './discipline.service';
 import { ProfilService } from './profil.service';
 import { EvenementType } from '../models/evenement.model';
+import { DisciplineType } from '../models/discipline.model';
 import { ObjectifPriority } from '../models/objectif.model';
 
 export interface GrokCommand {
@@ -280,24 +281,14 @@ Exemples:
   }
 
   private async createDiscipline(data: Record<string, unknown>): Promise<void> {
-    // Discipline creation via raw insert (no dedicated service method)
-    const { SupabaseService } = await import('./supabase.service');
-    const { AuthService } = await import('./auth.service');
-    const supabase = new SupabaseService();
-    const auth = new AuthService();
-    const user = auth.currentUser();
-    if (!user) return;
-
-    await supabase.client.from('disciplines').insert({
-      user_id: user.id,
+    await this.disciplines.create({
       name: (data['name'] as string) || 'Nouvelle discipline',
-      type: (data['type'] as string) || 'other',
+      type: (data['type'] as DisciplineType) || 'other',
       icon: (data['icon'] as string) || '🎯',
       color: (data['color'] as string) || '#3498db',
       xp: 0,
       level: 1,
     });
-    await this.disciplines.load();
   }
 
   private async updateProfil(data: Record<string, unknown>): Promise<void> {

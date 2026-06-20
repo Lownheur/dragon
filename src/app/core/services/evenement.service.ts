@@ -2,6 +2,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { SupabaseService } from './supabase.service';
 import { AuthService } from './auth.service';
 import { Evenement } from '../models/evenement.model';
+import { toCamelCase, toSnakeCase, mapArray } from '../utils/db-mapper.util';
 
 @Injectable({ providedIn: 'root' })
 export class EvenementService {
@@ -24,7 +25,7 @@ export class EvenementService {
       .order('start_time');
 
     if (error) { console.error(error); return; }
-    this._evenements.set((data as Evenement[]) ?? []);
+    this._evenements.set(mapArray<Evenement>(data ?? []));
   }
 
   async loadAll(): Promise<void> {
@@ -38,7 +39,7 @@ export class EvenementService {
       .order('start_time');
 
     if (error) { console.error(error); return; }
-    this._evenements.set((data as Evenement[]) ?? []);
+    this._evenements.set(mapArray<Evenement>(data ?? []));
   }
 
   async create(input: Partial<Evenement>): Promise<Evenement | null> {
@@ -47,28 +48,30 @@ export class EvenementService {
 
     const { data, error } = await this.supabase.client
       .from('evenements')
-      .insert({ ...input, user_id: user.id })
+      .insert({ ...(toSnakeCase(input as Record<string, unknown>) as Record<string, unknown>), user_id: user.id })
       .select()
       .single();
 
     if (error) { console.error(error); return null; }
-    this._evenements.update(list => [...list, data as Evenement].sort(
+    const created = toCamelCase<Evenement>(data as Record<string, unknown>);
+    this._evenements.update(list => [...list, created].sort(
       (a, b) => a.startTime.localeCompare(b.startTime)
     ));
-    return data as Evenement;
+    return created;
   }
 
   async update(id: string, changes: Partial<Evenement>): Promise<void> {
     const { data, error } = await this.supabase.client
       .from('evenements')
-      .update(changes)
+      .update(toSnakeCase(changes as Record<string, unknown>) as Record<string, unknown>)
       .eq('id', id)
       .select()
       .single();
 
     if (error) { console.error(error); return; }
+    const updated = toCamelCase<Evenement>(data as Record<string, unknown>);
     this._evenements.update(list =>
-      list.map(e => e.id === id ? { ...e, ...(data as Evenement) } : e)
+      list.map(e => e.id === id ? { ...e, ...updated } : e)
     );
   }
 

@@ -2,6 +2,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { SupabaseService } from './supabase.service';
 import { AuthService } from './auth.service';
 import { Objectif } from '../models/objectif.model';
+import { toCamelCase, toSnakeCase, mapArray } from '../utils/db-mapper.util';
 
 @Injectable({ providedIn: 'root' })
 export class ObjectifService {
@@ -22,7 +23,7 @@ export class ObjectifService {
       .order('created_at', { ascending: false });
 
     if (error) { console.error(error); return; }
-    this._objectifs.set((data as Objectif[]) ?? []);
+    this._objectifs.set(mapArray<Objectif>(data ?? []));
   }
 
   async create(input: Partial<Objectif>): Promise<Objectif | null> {
@@ -31,26 +32,28 @@ export class ObjectifService {
 
     const { data, error } = await this.supabase.client
       .from('objectifs')
-      .insert({ ...input, user_id: user.id })
+      .insert({ ...(toSnakeCase(input as Record<string, unknown>) as Record<string, unknown>), user_id: user.id })
       .select()
       .single();
 
     if (error) { console.error(error); return null; }
-    this._objectifs.update(list => [data as Objectif, ...list]);
-    return data as Objectif;
+    const created = toCamelCase<Objectif>(data as Record<string, unknown>);
+    this._objectifs.update(list => [created, ...list]);
+    return created;
   }
 
   async update(id: string, changes: Partial<Objectif>): Promise<void> {
     const { data, error } = await this.supabase.client
       .from('objectifs')
-      .update({ ...changes, updated_at: new Date().toISOString() })
+      .update({ ...(toSnakeCase(changes as Record<string, unknown>) as Record<string, unknown>), updated_at: new Date().toISOString() })
       .eq('id', id)
       .select()
       .single();
 
     if (error) { console.error(error); return; }
+    const updated = toCamelCase<Objectif>(data as Record<string, unknown>);
     this._objectifs.update(list =>
-      list.map(o => o.id === id ? { ...o, ...(data as Objectif) } : o)
+      list.map(o => o.id === id ? { ...o, ...updated } : o)
     );
   }
 

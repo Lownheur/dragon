@@ -2,6 +2,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { SupabaseService } from './supabase.service';
 import { AuthService } from './auth.service';
 import { Profil, PROFIL_DEFAULTS } from '../models/profil.model';
+import { toCamelCase, toSnakeCase } from '../utils/db-mapper.util';
 
 @Injectable({ providedIn: 'root' })
 export class ProfilService {
@@ -31,13 +32,19 @@ export class ProfilService {
       return;
     }
 
-    this._profil.set(data as Profil);
+    this._profil.set(toCamelCase<Profil>(data as Record<string, unknown>));
   }
 
   async create(userId: string): Promise<void> {
+    const defaults = toSnakeCase(PROFIL_DEFAULTS as unknown as Record<string, unknown>) as Record<string, unknown>;
     const { data, error } = await this.supabase.client
       .from('profils')
-      .insert({ user_id: userId, ...PROFIL_DEFAULTS, created_at: new Date().toISOString(), updated_at: new Date().toISOString() })
+      .insert({
+        user_id: userId,
+        ...defaults,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      })
       .select()
       .single();
 
@@ -45,7 +52,7 @@ export class ProfilService {
       console.error(error);
       return;
     }
-    this._profil.set(data as Profil);
+    this._profil.set(toCamelCase<Profil>(data as Record<string, unknown>));
   }
 
   async update(changes: Partial<Profil>): Promise<void> {
@@ -54,7 +61,7 @@ export class ProfilService {
 
     const { data, error } = await this.supabase.client
       .from('profils')
-      .update({ ...changes, updated_at: new Date().toISOString() })
+      .update({ ...(toSnakeCase(changes as Record<string, unknown>) as Record<string, unknown>), updated_at: new Date().toISOString() })
       .eq('user_id', user.id)
       .select()
       .single();
@@ -63,7 +70,7 @@ export class ProfilService {
       console.error(error);
       return;
     }
-    this._profil.set(data as Profil);
+    this._profil.set(toCamelCase<Profil>(data as Record<string, unknown>));
   }
 
   /** Calcule l'âge depuis la date d'anniversaire */

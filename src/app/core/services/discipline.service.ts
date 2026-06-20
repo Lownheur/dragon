@@ -2,6 +2,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { SupabaseService } from './supabase.service';
 import { AuthService } from './auth.service';
 import { Discipline, DEFAULT_DISCIPLINES } from '../models/discipline.model';
+import { toCamelCase, toSnakeCase, mapArray } from '../utils/db-mapper.util';
 
 @Injectable({ providedIn: 'root' })
 export class DisciplineService {
@@ -24,12 +25,11 @@ export class DisciplineService {
     if (error) { console.error(error); return; }
 
     if (!data?.length) {
-      // Initialize default disciplines
       await this.initializeDefaults();
       return;
     }
 
-    this._disciplines.set(data as Discipline[]);
+    this._disciplines.set(mapArray<Discipline>(data));
   }
 
   async initializeDefaults(): Promise<void> {
@@ -52,7 +52,23 @@ export class DisciplineService {
       .select();
 
     if (error) { console.error(error); return; }
-    this._disciplines.set(data as Discipline[]);
+    this._disciplines.set(mapArray<Discipline>(data));
+  }
+
+  async create(input: Partial<Discipline>): Promise<Discipline | null> {
+    const user = this.auth.currentUser();
+    if (!user) return null;
+
+    const { data, error } = await this.supabase.client
+      .from('disciplines')
+      .insert({ ...(toSnakeCase(input as Record<string, unknown>) as Record<string, unknown>), user_id: user.id })
+      .select()
+      .single();
+
+    if (error) { console.error(error); return null; }
+    const created = toCamelCase<Discipline>(data as Record<string, unknown>);
+    this._disciplines.update(list => [...list, created]);
+    return created;
   }
 
   async addXp(disciplineId: string, xp: number): Promise<void> {
