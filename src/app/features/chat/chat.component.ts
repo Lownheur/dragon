@@ -1,7 +1,7 @@
 import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { GrokService, GrokMessage } from '../../core/services/grok.service';
+import { GrokCommandService } from '../../core/services/grok-command.service';
 import { I18nService } from '../../core/services/i18n.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { I18nService } from '../../core/services/i18n.service';
   styleUrl: './chat.component.scss',
 })
 export class ChatComponent {
-  private readonly grokService = inject(GrokService);
+  private readonly grokCommand = inject(GrokCommandService);
   readonly i18n = inject(I18nService);
 
   readonly messages = signal<Array<{ role: string; content: string }>>([]);
@@ -25,34 +25,25 @@ export class ChatComponent {
     return this.i18n.t(key);
   }
 
-  send(): void {
+  async send(): Promise<void> {
     const input = this.userInput().trim();
     if (!input || this.isLoading()) return;
 
-    const userMsg: GrokMessage = { role: 'user', content: input };
     this.messages.update((msgs) => [...msgs, { role: 'user', content: input }]);
     this.userInput.set('');
     this.isLoading.set(true);
 
-    this.grokService
-      .sendMessage([
-        ...this.messages()
-          .map((m) => ({ role: m.role as 'user' | 'assistant', content: m.content })),
-        userMsg,
-      ])
-      .subscribe({
-        next: (reply) => {
-          this.messages.update((msgs) => [...msgs, { role: 'assistant', content: reply }]);
-          this.isLoading.set(false);
-        },
-        error: () => {
-          this.messages.update((msgs) => [
-            ...msgs,
-            { role: 'assistant', content: this.t('chat.error') },
-          ]);
-          this.isLoading.set(false);
-        },
-      });
+    try {
+      const reply = await this.grokCommand.execute(input);
+      this.messages.update((msgs) => [...msgs, { role: 'assistant', content: reply }]);
+    } catch {
+      this.messages.update((msgs) => [
+        ...msgs,
+        { role: 'assistant', content: this.t('chat.error') },
+      ]);
+    } finally {
+      this.isLoading.set(false);
+    }
   }
 
   onKeydown(event: KeyboardEvent): void {

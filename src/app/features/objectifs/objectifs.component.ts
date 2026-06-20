@@ -2,6 +2,7 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ObjectifService } from '../../core/services/objectif.service';
+import { I18nService } from '../../core/services/i18n.service';
 import { Objectif, ObjectifStatus, ObjectifPriority } from '../../core/models/objectif.model';
 
 @Component({
@@ -13,23 +14,24 @@ import { Objectif, ObjectifStatus, ObjectifPriority } from '../../core/models/ob
 })
 export class ObjectifsComponent implements OnInit {
   private readonly objectifService = inject(ObjectifService);
+  readonly i18n = inject(I18nService);
 
   readonly objectifs = this.objectifService.objectifs;
   readonly showCreate = signal(false);
   readonly editingId = signal<string | null>(null);
 
-  readonly priorities: { value: ObjectifPriority; label: string; color: string }[] = [
-    { value: 'low', label: 'Basse', color: '#27ae60' },
-    { value: 'medium', label: 'Moyenne', color: '#f39c12' },
-    { value: 'high', label: 'Haute', color: '#e67e22' },
-    { value: 'critical', label: 'Critique', color: '#e74c3c' },
+  readonly priorities: { value: ObjectifPriority; labelKey: string; color: string }[] = [
+    { value: 'low', labelKey: 'objectifs.priorityLow', color: '#27ae60' },
+    { value: 'medium', labelKey: 'objectifs.priorityMedium', color: '#f39c12' },
+    { value: 'high', labelKey: 'objectifs.priorityHigh', color: '#e67e22' },
+    { value: 'critical', labelKey: 'objectifs.priorityCritical', color: '#e74c3c' },
   ];
 
-  readonly statuses: { value: ObjectifStatus; label: string }[] = [
-    { value: 'pending', label: 'À faire' },
-    { value: 'in_progress', label: 'En cours' },
-    { value: 'done', label: 'Terminé' },
-    { value: 'abandoned', label: 'Abandonné' },
+  readonly statuses: { value: ObjectifStatus; labelKey: string }[] = [
+    { value: 'pending', labelKey: 'objectifs.statusPending' },
+    { value: 'in_progress', labelKey: 'objectifs.statusInProgress' },
+    { value: 'done', labelKey: 'objectifs.statusDone' },
+    { value: 'abandoned', labelKey: 'objectifs.statusAbandoned' },
   ];
 
   newObjectif = this.emptyForm();
@@ -37,6 +39,22 @@ export class ObjectifsComponent implements OnInit {
 
   ngOnInit(): void {
     this.objectifService.load();
+  }
+
+  t(key: string): string {
+    return this.i18n.t(key);
+  }
+
+  private getLocale(): string {
+    return this.i18n.locale() === 'en' ? 'en-US' : 'fr-FR';
+  }
+
+  priorityLabel(key: string): string {
+    return this.t(key);
+  }
+
+  statusLabel(key: string): string {
+    return this.t(key);
   }
 
   emptyForm() {
@@ -114,7 +132,8 @@ export class ObjectifsComponent implements OnInit {
   }
 
   getStatusLabel(s: ObjectifStatus): string {
-    return this.statuses.find(x => x.value === s)?.label ?? s;
+    const found = this.statuses.find(x => x.value === s);
+    return found ? this.t(found.labelKey) : s;
   }
 
   isOverdue(o: Objectif): boolean {
@@ -124,6 +143,6 @@ export class ObjectifsComponent implements OnInit {
 
   formatDeadline(d: string | null): string {
     if (!d) return '';
-    return new Date(d).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
+    return new Date(d).toLocaleDateString(this.getLocale(), { day: 'numeric', month: 'short' });
   }
 }
