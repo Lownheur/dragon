@@ -1,26 +1,26 @@
 <div class="objectifs">
   <div class="objectifs__header">
     <h1 class="objectifs__title">🎯 {{ t('objectifs.title') }}</h1>
-    <button class="btn btn--primary" (click)="showCreate.set(true)">+ {{ t('objectifs.add') }}</button>
+    <button class="btn btn--primary" (click)="showCreate.set(true)">+ {{ t('objectifs.newObjective') }}</button>
   </div>
 
   <!-- Stats bar -->
   <div class="objectifs__stats">
     <div class="stat-card">
       <span class="stat-card__value">{{ stats().total }}</span>
-      <span class="stat-card__label">{{ t('objectifs.statsTotal') || 'Total' }}</span>
+      <span class="stat-card__label">{{ t('objectifs.stats.total') || 'Total' }}</span>
     </div>
     <div class="stat-card">
       <span class="stat-card__value stat-card__value--blue">{{ stats().inProgress }}</span>
-      <span class="stat-card__label">{{ t('objectifs.inProgress') || 'En cours' }}</span>
+      <span class="stat-card__label">{{ t('objectifs.stats.inProgress') || 'En cours' }}</span>
     </div>
     <div class="stat-card">
       <span class="stat-card__value stat-card__value--green">{{ stats().done }}</span>
-      <span class="stat-card__label">{{ t('objectifs.done') || 'Terminés' }}</span>
+      <span class="stat-card__label">{{ t('objectifs.stats.done') || 'Terminés' }}</span>
     </div>
     <div class="stat-card">
       <span class="stat-card__value stat-card__value--orange">{{ stats().completionRate }}%</span>
-      <span class="stat-card__label">{{ t('objectifs.completed') || 'Complétés' }}</span>
+      <span class="stat-card__label">{{ t('objectifs.stats.completionRate') || 'Complétés' }}</span>
     </div>
   </div>
 
@@ -30,7 +30,7 @@
       class="filter-btn"
       [class.filter-btn--active]="filterStatus === 'all'"
       (click)="setFilter('all')"
-    >{{ t('objectifs.filterAll') || 'Tous' }}</button>
+    >{{ t('objectifs.filters.all') || 'Tous' }}</button>
     @for (s of statuses; track s.value) {
       <button
         class="filter-btn"
@@ -51,7 +51,7 @@
           }
           <div class="objectif-card__meta">
             <span class="badge" [style.background]="getPriorityColor(obj.priority)">
-              {{ priorityLabel('objectifs.priority' + obj.priority.charAt(0).toUpperCase() + obj.priority.slice(1)) }}
+              {{ priorityLabel('objectifs.priorities.' + obj.priority) }}
             </span>
             @if (obj.deadline) {
               <span class="deadline" [class.deadline--overdue]="isOverdue(obj)">
@@ -91,7 +91,7 @@
       </div>
     } @empty {
       <div class="empty-state">
-        <p>{{ t('objectifs.noGoals') }}</p>
+        <p>{{ t('objectifs.empty') }}</p>
       </div>
     }
   </div>
@@ -102,21 +102,21 @@
   <div class="modal-overlay" (click)="showCreate.set(false)">
     <div class="modal" (click)="$event.stopPropagation()">
       <div class="modal__header">
-        <h2>{{ t('objectifs.add') }}</h2>
+        <h2>{{ t('objectifs.newObjective') }}</h2>
         <button class="modal__close" (click)="showCreate.set(false)">×</button>
       </div>
       <div class="modal__body">
         <div class="form-group">
-          <label>{{ t('objectifs.titleLabel') || 'Titre' }} *</label>
-          <input type="text" [(ngModel)]="newObjectif.title" [placeholder]="t('objectifs.titlePlaceholder') || 'Mon objectif...'" />
+          <label>{{ t('objectifs.form.title') }} *</label>
+          <input type="text" [(ngModel)]="newObjectif.title" [placeholder]="t('objectifs.form.title')" />
         </div>
         <div class="form-group">
-          <label>{{ t('objectifs.desc') || 'Description' }}</label>
-          <textarea [(ngModel)]="newObjectif.description" [placeholder]="t('objectifs.descPlaceholder') || 'Décris ton objectif...'"></textarea>
+          <label>{{ t('objectifs.form.description') }}</label>
+          <textarea [(ngModel)]="newObjectif.description" [placeholder]="t('objectifs.form.description')"></textarea>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label>{{ t('objectifs.priority') }}</label>
+            <label>{{ t('objectifs.form.priority') }}</label>
             <select [(ngModel)]="newObjectif.priority">
               @for (p of priorities; track p.value) {
                 <option [value]="p.value">{{ t(p.labelKey) }}</option>
@@ -124,22 +124,22 @@
             </select>
           </div>
           <div class="form-group">
-            <label>{{ t('objectifs.deadline') }}</label>
+            <label>{{ t('objectifs.form.deadline') }}</label>
             <input type="date" [(ngModel)]="newObjectif.deadline" />
           </div>
         </div>
         <div class="form-group">
-          <label>{{ t('objectifs.xpReward') }}</label>
+          <label>{{ t('objectifs.form.xpReward') }}</label>
           <input type="number" [(ngModel)]="newObjectif.xpReward" min="10" step="10" />
         </div>
         <div class="form-group">
-          <label>{{ t('objectifs.tags') || 'Tags (séparés par virgule)' }}</label>
-          <input type="text" [(ngModel)]="newObjectif.tags" [placeholder]="t('objectifs.tagsPlaceholder') || 'sport, santé, travail'" />
+          <label>{{ t('objectifs.form.tags') }}</label>
+          <input type="text" [(ngModel)]="newObjectif.tags" [placeholder]="t('objectifs.form.tags')" />
         </div>
       </div>
       <div class="modal__footer">
-        <button class="btn btn--primary" (click)="create()">{{ t('objectifs.create') || 'Créer' }}</button>
-        <button class="btn btn--secondary" (click)="showCreate.set(false)">{{ t('objectifs.cancel') }}</button>
+        <button class="btn btn--primary" (click)="create()">{{ t('objectifs.form.create') }}</button>
+        <button class="btn btn--secondary" (click)="showCreate.set(false)">{{ t('objectifs.form.cancel') }}</button>
       </div>
     </div>
   </div>

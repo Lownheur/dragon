@@ -21,17 +21,17 @@ export class ObjectifsComponent implements OnInit {
   readonly editingId = signal<string | null>(null);
 
   readonly priorities: { value: ObjectifPriority; labelKey: string; color: string }[] = [
-    { value: 'low', labelKey: 'objectifs.priorityLow', color: '#27ae60' },
-    { value: 'medium', labelKey: 'objectifs.priorityMedium', color: '#f39c12' },
-    { value: 'high', labelKey: 'objectifs.priorityHigh', color: '#e67e22' },
-    { value: 'critical', labelKey: 'objectifs.priorityCritical', color: '#e74c3c' },
+    { value: 'low', labelKey: 'objectifs.priorities.low', color: '#27ae60' },
+    { value: 'medium', labelKey: 'objectifs.priorities.medium', color: '#f39c12' },
+    { value: 'high', labelKey: 'objectifs.priorities.high', color: '#e67e22' },
+    { value: 'critical', labelKey: 'objectifs.priorities.critical', color: '#e74c3c' },
   ];
 
   readonly statuses: { value: ObjectifStatus; labelKey: string }[] = [
-    { value: 'pending', labelKey: 'objectifs.statusPending' },
-    { value: 'in_progress', labelKey: 'objectifs.statusInProgress' },
-    { value: 'done', labelKey: 'objectifs.statusDone' },
-    { value: 'abandoned', labelKey: 'objectifs.statusAbandoned' },
+    { value: 'pending', labelKey: 'objectifs.filters.pending' },
+    { value: 'in_progress', labelKey: 'objectifs.filters.in_progress' },
+    { value: 'done', labelKey: 'objectifs.filters.done' },
+    { value: 'abandoned', labelKey: 'objectifs.filters.abandoned' },
   ];
 
   newObjectif = this.emptyForm();
