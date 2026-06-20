@@ -1,5 +1,53 @@
 # Dragon Life OS — Session Log
 
+## 2026-06-20 — Session 9 : Critical Bug Fixes 🔴
+
+### 🐛 Bugs critiques corrigés
+
+**1. snake_case ↔ camelCase — TOUTES les données Supabase cassées**
+- Supabase retourne snake_case (`user_id`, `start_time`, `end_time`) mais les modèles Angular utilisent camelCase
+- Résultat: toutes les propriétés étaient `undefined` dans les vues
+- Fix: `db-mapper.util.ts` avec `toCamelCase()` / `toSnakeCase()` / `mapArray()`
+- Corrigé dans: EvenementService, ObjectifService, DisciplineService, ProfilService, PersonnageService, IndicateurService
+
+**2. GrokCommandService — DI cassé**
+- `createDiscipline()` utilisait `new SupabaseService()` et `new AuthService()` au lieu d'injecter
+- Fix: ajouté `create()` à DisciplineService, appelé proprement via `this.disciplines.create()`
+- Corrigé aussi: `DisciplineType` cast dans GrokCommandService
+
+**3. GrokCommandService.parseTime — bug "demain 10h"**
+- "demain 10:00" n'était pas parsé correctement (redevient aujourd'hui)
+- Fix: gère maintenant les mots-clés avant l'heure ("demain 10h", "demain 14:30")
+
+**4. DashboardComponent — double header/sidebar/chat**
+- MainLayoutComponent rendait déjà header + sidebar + chat
+- DashboardComponent rendait ALSO header + sidebar + chat → duplication
+- Fix: DashboardComponent = page d'accueil avec 4 cartes de navigation (EDT, Objectifs, Journal, Feuille)
+
+### Fichiers modifiés
+- `src/app/core/utils/db-mapper.util.ts` (nouveau)
+- `src/app/core/services/*.service.ts` — tous mis à jour avec mapping
+- `src/app/features/dashboard/*` — refactorisé
+- Commits: `cc43692`, `cb82331`, `ef2d525`, `ee492f7`
+- Build: ✅ OK
+
+### État actuel
+- 4 vues: EDT ✅, Objectifs ✅, Journal ✅, Feuille de Perso ✅
+- Grok service: intégré ✅
+- Chat flottant: accessible depuis toutes les pages auth ✅
+- Dark/light theme: toggle dans header ✅
+- i18n FR/EN: intégré ✅
+- Dashboard: page d'accueil propre avec navigation ✅
+- **Supabase schema: ⚠️ pas encore exécuté** (requiert token d'accès Supabase)
+
+### Prochaines étapes
+1. **Supabase schema** — exécuter `supabase/schema.sql` (besoin token Supabase)
+2. **Tests E2E** — Playwright ready mais pas encore run
+3. **Déployer** — Cloudflare Pages
+4. **Tests E2E complets** — login, register, navigation, CRUD
+
+---
+
 ## 2026-06-20 — Session 8 : Grok AI Controller + i18n Fixes ✅
 
 ### Ce qui a été fait
