@@ -246,3 +246,7 @@
 ### SQL Schema Supabase (`supabase/migrations/001_initial_schema.sql`)
 - Tables: personnages, disciplines, objectifs, evenements, indicateurs
 - RLS policies — prêt à exécuter
+
+
+# Session 11 - 2026-06-20 18:12
+Fixed routing conflict, all E2E tests pass. See git log for details.
