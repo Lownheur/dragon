@@ -140,26 +140,42 @@ Exemples:
 
   private parseTime(timeStr: string): { date: string; hour: string; minute: string } {
     const now = new Date();
-    const lower = timeStr.toLowerCase();
+    const lower = timeStr.toLowerCase().trim();
 
-    if (lower === 'demain') {
+    // Check for "demain" keyword (possibly with time after)
+    if (lower.startsWith('demain')) {
       now.setDate(now.getDate() + 1);
+      const timePart = lower.replace('demain', '').trim();
+      if (timePart) {
+        const parsed = this.parseTimePart(timePart, now);
+        return parsed;
+      }
       return { date: now.toISOString().split('T')[0], hour: '09', minute: '00' };
     }
 
+    // Check for "aujourdhui" or "maintenant"
     if (lower === 'aujourdhui' || lower === 'maintenant') {
-      return { date: now.toISOString().split('T')[0], hour: String(now.getHours()).padStart(2, '0'), minute: String(now.getMinutes()).padStart(2, '0') };
+      return {
+        date: now.toISOString().split('T')[0],
+        hour: String(now.getHours()).padStart(2, '0'),
+        minute: String(now.getMinutes()).padStart(2, '0'),
+      };
     }
 
+    // Just a time part — use today's date
+    const parsed = this.parseTimePart(lower, now);
+    return parsed;
+  }
+
+  private parseTimePart(timePart: string, baseDate: Date): { date: string; hour: string; minute: string } {
     // Parse "HH:mm" or "HHh" or "HH:00"
-    const timeMatch = timeStr.match(/(\d{1,2})[:h]?(\d{0,2})/);
+    const timeMatch = timePart.match(/(\d{1,2})[:h]?(\d{0,2})/);
     if (timeMatch) {
       const hour = timeMatch[1].padStart(2, '0');
       const minute = (timeMatch[2] || '00').padStart(2, '0');
-      return { date: now.toISOString().split('T')[0], hour, minute };
+      return { date: baseDate.toISOString().split('T')[0], hour, minute };
     }
-
-    return { date: now.toISOString().split('T')[0], hour: '09', minute: '00' };
+    return { date: baseDate.toISOString().split('T')[0], hour: '09', minute: '00' };
   }
 
   private parseToISO(date: string, hour: string, minute: string): string {
