@@ -18,8 +18,7 @@
 ### Prochaines étapes
 1. **Supabase schema** — exécuter `supabase/schema.sql` dans le SQL Editor de Supabase
 2. **Tests E2E** — exécuter `npm run test:e2e`
-3. **Déployer** — Cloudflare Pages
-4. **i18n CharacterSheet** — vérifier que la feuille de perso utilise i18n
+3. **Déployer** — Cloudflare Pages (push → auto-deploy)
 
 ---
 

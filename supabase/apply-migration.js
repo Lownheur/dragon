@@ -1,56 +1,47 @@
 /**
  * Dragon Life OS — Supabase SQL Migration Runner
- * =============================================
- * Usage:
- *   1. Get your SERVICE_ROLE_KEY from Supabase Dashboard:
- *      Dashboard → Project Settings → API → service_role key
- *   2. Run:
- *      SERVICE_ROLE_KEY=your_key_here node supabase/apply-migration.js
- *
- * Or set it in .env as SUPABASE_SERVICE_ROLE_KEY
+ * Usage: node supabase/apply-migration.js
  */
 
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-const SUPABASE_URL = 'https://rbkkibtauyucbaytnzno.supabase.co';
-const SERVICE_ROLE_KEY = process.env.SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+const SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const SUPABASE_URL = process.env.SUPABASE_URL || 'https://rbkkibtauyucbaytnzno.supabase.co';
 
 if (!SERVICE_ROLE_KEY) {
-  console.error('❌  SERVICE_ROLE_KEY not found.');
-  console.error('   Get it from: Supabase Dashboard → Project Settings → API → service_role secret');
-  console.error('   Then run: SERVICE_ROLE_KEY=<key> node supabase/apply-migration.js');
+  console.error('❌  SUPABASE_SERVICE_ROLE_KEY not found in .env');
   process.exit(1);
 }
 
+const projectRef = 'rbkkibtauyucbaytnzno';
 const sqlPath = path.join(__dirname, 'schema.sql');
 const sql = fs.readFileSync(sqlPath, 'utf8');
 
-const data = JSON.stringify({
-  query: sql,
-  params: [],
-});
+const postData = JSON.stringify({ query: sql, params: [] });
 
 const options = {
-  hostname: 'rbkkibtauyucbaytnzno.supabase.co',
+  hostname: 'api.supabase.com',
   port: 443,
-  path: '/rest/v1/rpc/sql',
+  path: `/v1/projects/${projectRef}/database/query`,
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
-    'apikey': SERVICE_ROLE_KEY,
     'Authorization': `Bearer ${SERVICE_ROLE_KEY}`,
-    'Content-Length': data.length,
+    'apikey': SERVICE_ROLE_KEY,
+    'Content-Length': Buffer.byteLength(postData),
   },
 };
 
+console.log('🚀 Applying Dragon Life OS schema to Supabase...');
+
 const req = https.request(options, (res) => {
   let body = '';
-  res.on('data', (chunk) => body += chunk);
+  res.on('data', (chunk) => { body += chunk; });
   res.on('end', () => {
     if (res.statusCode >= 200 && res.statusCode < 300) {
-      console.log('✅  Migration applied successfully!');
+      console.log('✅ Migration applied successfully!');
     } else {
       console.error(`❌  Migration failed (HTTP ${res.statusCode}):`);
       console.error(body);
@@ -64,5 +55,5 @@ req.on('error', (e) => {
   process.exit(1);
 });
 
-req.write(data);
+req.write(postData);
 req.end();
