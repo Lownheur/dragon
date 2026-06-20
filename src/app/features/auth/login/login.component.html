@@ -1,0 +1,46 @@
+<div class="auth-form">
+  <h2 class="auth-form__title">Connexion</h2>
+  <p class="auth-form__sub">Content de vous revoir.</p>
+
+  @if (errorMessage()) {
+    <div class="auth-form__error">{{ errorMessage() }}</div>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-form__fields">
+    <label class="field">
+      <span class="field__label">Email</span>
+      <input
+        id="login-email"
+        class="field__input"
+        type="email"
+        placeholder="votre@email.com"
+        formControlName="email"
+      />
+      @if (getError('email')) {
+        <span class="field__error">{{ getError('email') }}</span>
+      }
+    </label>
+
+    <label class="field">
+      <span class="field__label">Mot de passe</span>
+      <input
+        id="login-password"
+        class="field__input"
+        type="password"
+        placeholder="••••••"
+        formControlName="password"
+      />
+      @if (getError('password')) {
+        <span class="field__error">{{ getError('password') }}</span>
+      }
+    </label>
+
+    <button type="submit" class="auth-form__submit" [disabled]="isSubmitting()">
+      {{ isSubmitting() ? 'Connexion...' : 'Se connecter' }}
+    </button>
+  </form>
+
+  <p class="auth-form__footer">
+    Pas encore de compte ? <a routerLink="/register" class="auth-form__link">Créer un compte</a>
+  </p>
+</div>

@@ -1,0 +1,124 @@
+@use 'variables' as *;
+
+.main-layout {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+
+  &__header {
+    position: sticky;
+    top: 0;
+    z-index: $z-sticky;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    padding: 0 $spacing-6;
+    background: #fff;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  &__logo {
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    color: #000;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  &__nav {
+    display: flex;
+    gap: $spacing-1;
+  }
+
+  &__nav-link {
+    padding: $spacing-1 $spacing-3;
+    font-size: $font-size-sm;
+    color: #888;
+    text-decoration: none;
+    border-radius: $border-radius-sm;
+    transition:
+      color 150ms,
+      background 150ms;
+
+    &:hover {
+      color: #000;
+      background: #f5f5f5;
+    }
+    &--active {
+      color: #000;
+      font-weight: $font-weight-medium;
+    }
+  }
+
+  &__header-right {
+    display: flex;
+    align-items: center;
+    gap: $spacing-4;
+  }
+
+  &__user-email {
+    font-size: $font-size-xs;
+    color: #aaa;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__logout {
+    background: none;
+    border: 1px solid #e0e0e0;
+    border-radius: $border-radius-sm;
+    padding: $spacing-1 $spacing-3;
+    font-size: $font-size-xs;
+    color: #666;
+    cursor: pointer;
+    font-family: inherit;
+    transition:
+      border-color 150ms,
+      color 150ms;
+
+    &:hover {
+      border-color: #000;
+      color: #000;
+    }
+  }
+
+  &__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+}
+
+// Chat panel — floating bottom-right
+.chat-panel {
+  position: fixed;
+  bottom: $spacing-6;
+  right: $spacing-6;
+  z-index: $z-modal;
+  width: 360px;
+  max-width: calc(100vw - $spacing-12);
+  height: 480px;
+  max-height: calc(100vh - 120px);
+  box-shadow: $shadow-xl;
+  border-radius: $border-radius-xl;
+  overflow: hidden;
+  animation: slideUp 200ms ease forwards;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

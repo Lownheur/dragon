@@ -1,0 +1,133 @@
+@use '../../../styles/variables' as *;
+
+.objectives {
+  padding: $spacing-6;
+  max-width: 720px;
+  margin: 0 auto;
+
+  &__header {
+    margin-bottom: $spacing-8;
+  }
+
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $color-neutral-100;
+    margin: 0 0 $spacing-1;
+  }
+
+  &__subtitle {
+    font-size: $font-size-sm;
+    color: $color-neutral-500;
+    margin: 0;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+    margin-bottom: $spacing-6;
+  }
+
+  &__add {
+    display: flex;
+    gap: $spacing-3;
+  }
+
+  &__input {
+    flex: 1;
+    background: $color-neutral-800;
+    border: 1px solid $color-neutral-700;
+    border-radius: $border-radius-md;
+    padding: $spacing-3 $spacing-4;
+    color: $color-neutral-100;
+    font-size: $font-size-sm;
+    outline: none;
+    transition: border-color $transition-fast;
+
+    &:focus { border-color: $color-primary-500; }
+    &::placeholder { color: $color-neutral-500; }
+  }
+
+  &__add-btn {
+    background: $color-primary-600;
+    color: white;
+    border: none;
+    border-radius: $border-radius-md;
+    padding: $spacing-3 $spacing-5;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    cursor: pointer;
+    transition: background $transition-fast;
+    white-space: nowrap;
+
+    &:hover { background: $color-primary-500; }
+  }
+}
+
+.objective-card {
+  background: $color-neutral-800;
+  border-radius: $border-radius-lg;
+  padding: $spacing-5;
+  border-left: 4px solid $color-neutral-600;
+
+  &--sport { border-left-color: $color-success-500; }
+  &--sommeil { border-left-color: $color-secondary-500; }
+  &--alimentation { border-left-color: $color-warning-500; }
+  &--taf { border-left-color: $color-primary-500; }
+  &--trajet { border-left-color: $color-info-500; }
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-3;
+  }
+
+  &__label {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: $color-neutral-100;
+  }
+
+  &__level {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    color: $color-primary-400;
+    background: $color-primary-900;
+    padding: $spacing-1 $spacing-2;
+    border-radius: $border-radius-full;
+  }
+
+  &__progress-bar {
+    background: $color-neutral-700;
+    border-radius: $border-radius-full;
+    height: 8px;
+    overflow: hidden;
+    margin-bottom: $spacing-2;
+  }
+
+  &__progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, $color-primary-600, $color-primary-400);
+    border-radius: $border-radius-full;
+    transition: width $transition-slow;
+  }
+
+  &__stats {
+    display: flex;
+    gap: $spacing-3;
+    font-size: $font-size-xs;
+    color: $color-neutral-400;
+  }
+
+  &__xp {
+    color: $color-warning-500;
+    font-weight: $font-weight-semibold;
+  }
+
+  &__xp-needed {
+    color: $color-neutral-500;
+    margin-left: auto;
+  }
+}

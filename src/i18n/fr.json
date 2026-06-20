@@ -1,0 +1,129 @@
+{
+  "app": {
+    "name": "🐉 Dragon Life"
+  },
+  "header": {
+    "openMenu": "Ouvrir le menu",
+    "switchTheme": "Changer le thème",
+    "openChat": "Ouvrir le chat Grok"
+  },
+  "sidebar": {
+    "close": "Fermer le menu",
+    "logout": "Déconnexion"
+  },
+  "nav": {
+    "edt": "Emploi du Temps",
+    "objectifs": "Objectifs",
+    "journal": "Journal du Jour",
+    "personnage": "Feuille de Perso"
+  },
+  "chat": {
+    "title": "🐉 Assistant Grok",
+    "clear": "Effacer la conversation",
+    "empty": "Pose-moi une question sur ta journée, tes objectifs ou ton planning !",
+    "placeholder": "Dis-moi ce que tu veux...",
+    "error": "Erreur de connexion à Grok. Réessaie.",
+    "send": "Envoyer"
+  },
+  "auth": {
+    "login": "Connexion",
+    "register": "Inscription",
+    "logout": "Déconnexion",
+    "email": "Email",
+    "password": "Mot de passe",
+    "submit": "Se connecter",
+    "noAccount": "Pas encore de compte ?",
+    "hasAccount": "Déjà un compte ?",
+    "createAccount": "Créer un compte",
+    "loginLink": "Se connecter"
+  },
+  "hero": {
+    "title": "🐉 Dragon Life OS",
+    "subtitle": "Ta vie, version RPG. Planifie, progresse, vis.",
+    "cta": "Commencer maintenant",
+    "login": "Connexion"
+  },
+  "edt": {
+    "title": "Emploi du Temps",
+    "today": "Aujourd'hui",
+    "addEvent": "Nouvel événement",
+    "noEvents": "Aucun événement aujourd'hui",
+    "eventType": "Type",
+    "eventTitle": "Titre",
+    "eventDesc": "Description",
+    "eventStart": "Début",
+    "eventEnd": "Fin",
+    "eventLocation": "Lieu",
+    "eventColor": "Couleur",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "types": {
+      "work": "Travail",
+      "sport": "Sport",
+      "sleep": "Sommeil",
+      "food": "Alimentation",
+      "transport": "Trajet",
+      "other": "Autre"
+    }
+  },
+  "objectifs": {
+    "title": "Objectifs",
+    "add": "Nouvel objectif",
+    "noGoals": "Aucun objectif. Ajoute-en un !",
+    "priority": "Priorité",
+    "deadline": "Échéance",
+    "progress": "Progression",
+    "status": "Statut",
+    "xpReward": "Récompense XP",
+    "tags": "Tags",
+    "pending": "En attente",
+    "inProgress": "En cours",
+    "completed": "Terminé",
+    "high": "Haute",
+    "medium": "Moyenne",
+    "low": "Basse"
+  },
+  "journal": {
+    "title": "Journal du Jour",
+    "date": "Date",
+    "mood": "Humeur",
+    "energy": "Énergie",
+    "stress": "Stress",
+    "sleepQuality": "Qualité du sommeil",
+    "sleepHours": "Heures de sommeil",
+    "water": "Litres d'eau",
+    "exercise": "Exercice (min)",
+    "screenTime": "Temps d'écran (min)",
+    "notes": "Notes",
+    "notesPlaceholder": "Comment s'est passée ta journée ?",
+    "save": "Enregistrer",
+    "saved": "✓ Sauvegardé"
+  },
+  "personnage": {
+    "title": "Feuille de Perso",
+    "subtitle": "Ton profil et tes statistiques RPG",
+    "level": "Level",
+    "xp": "XP",
+    "totalXp": "XP Total",
+    "streak": "Série",
+    "maxStreak": "max",
+    "xpToNext": "XP avant level up",
+    "stats": "Statistiques par Discipline",
+    "profile": "Profil",
+    "edit": "Modifier",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "nom": "Nom",
+    "prenom": "Prénom",
+    "dateAniv": "Date d'anniversaire",
+    "adresse": "Adresse",
+    "taf": "Travail / Métier",
+    "age": "Âge",
+    "loading": "Chargement...",
+    "noStreak": "Pas de série active",
+    "discipline": "Discipline",
+    "levelShort": "Lv.",
+    "days": "j"
+  }
+}

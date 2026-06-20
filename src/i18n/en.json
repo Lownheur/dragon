@@ -1,0 +1,129 @@
+{
+  "app": {
+    "name": "🐉 Dragon Life"
+  },
+  "header": {
+    "openMenu": "Open menu",
+    "switchTheme": "Switch theme",
+    "openChat": "Open Grok chat"
+  },
+  "sidebar": {
+    "close": "Close menu",
+    "logout": "Logout"
+  },
+  "nav": {
+    "edt": "Schedule",
+    "objectifs": "Goals",
+    "journal": "Daily Journal",
+    "personnage": "Character Sheet"
+  },
+  "chat": {
+    "title": "🐉 Grok Assistant",
+    "clear": "Clear conversation",
+    "empty": "Ask me anything about your day, goals or schedule!",
+    "placeholder": "Tell me what you want...",
+    "error": "Grok connection error. Try again.",
+    "send": "Send"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign in",
+    "noAccount": "No account yet?",
+    "hasAccount": "Already have an account?",
+    "createAccount": "Create account",
+    "loginLink": "Sign in"
+  },
+  "hero": {
+    "title": "🐉 Dragon Life OS",
+    "subtitle": "Your life, RPG version. Plan, progress, live.",
+    "cta": "Get started",
+    "login": "Login"
+  },
+  "edt": {
+    "title": "Schedule",
+    "today": "Today",
+    "addEvent": "New event",
+    "noEvents": "No events today",
+    "eventType": "Type",
+    "eventTitle": "Title",
+    "eventDesc": "Description",
+    "eventStart": "Start",
+    "eventEnd": "End",
+    "eventLocation": "Location",
+    "eventColor": "Color",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "types": {
+      "work": "Work",
+      "sport": "Sport",
+      "sleep": "Sleep",
+      "food": "Food",
+      "transport": "Transport",
+      "other": "Other"
+    }
+  },
+  "objectifs": {
+    "title": "Goals",
+    "add": "New goal",
+    "noGoals": "No goals yet. Add one!",
+    "priority": "Priority",
+    "deadline": "Deadline",
+    "progress": "Progress",
+    "status": "Status",
+    "xpReward": "XP Reward",
+    "tags": "Tags",
+    "pending": "Pending",
+    "inProgress": "In Progress",
+    "completed": "Completed",
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low"
+  },
+  "journal": {
+    "title": "Daily Journal",
+    "date": "Date",
+    "mood": "Mood",
+    "energy": "Energy",
+    "stress": "Stress",
+    "sleepQuality": "Sleep Quality",
+    "sleepHours": "Hours of Sleep",
+    "water": "Liters of water",
+    "exercise": "Exercise (min)",
+    "screenTime": "Screen time (min)",
+    "notes": "Notes",
+    "notesPlaceholder": "How was your day?",
+    "save": "Save",
+    "saved": "✓ Saved"
+  },
+  "personnage": {
+    "title": "Character Sheet",
+    "subtitle": "Your profile and RPG stats",
+    "level": "Level",
+    "xp": "XP",
+    "totalXp": "Total XP",
+    "streak": "Streak",
+    "maxStreak": "max",
+    "xpToNext": "XP to next level",
+    "stats": "Stats per Discipline",
+    "profile": "Profile",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "nom": "Last Name",
+    "prenom": "First Name",
+    "dateAniv": "Birthday",
+    "adresse": "Address",
+    "taf": "Work / Job",
+    "age": "Age",
+    "loading": "Loading...",
+    "noStreak": "No active streak",
+    "discipline": "Discipline",
+    "levelShort": "Lv.",
+    "days": "d"
+  }
+}

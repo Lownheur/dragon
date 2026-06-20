@@ -1,0 +1,216 @@
+// ============================================================
+// DRAGON — GLOBAL STYLES
+// ============================================================
+
+// Design system
+@use 'styles/variables' as *;
+@use 'styles/reset';
+@use 'styles/typography';
+@use 'styles/animations';
+
+// Note: les mixins sont importés dans chaque composant via @use
+// Exemple dans un composant : @use 'styles/mixins' as *;
+
+// ------------------------------------------------------------
+// STYLES GLOBAUX — LIGHT (default)
+// ------------------------------------------------------------
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: $color-neutral-0;
+  color: $color-neutral-900;
+  min-height: 100vh;
+  min-height: 100dvh;
+  transition: background-color 200ms, color 200ms;
+}
+
+// conteneur principal angular
+app-root {
+  display: block;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+// ------------------------------------------------------------
+// DARK THEME
+// ------------------------------------------------------------
+
+[data-theme='dark'] {
+  --color-bg: #{$color-neutral-900};
+  --color-text: #{$color-neutral-100};
+  --color-surface: #{$color-neutral-800};
+  --color-border: #{$color-neutral-700};
+  --color-primary: #{$color-primary-400};
+
+  body,
+  .main-layout {
+    background-color: $color-neutral-900;
+    color: $color-neutral-100;
+  }
+
+  .header,
+  .sidebar,
+  .main-layout__header {
+    background-color: $color-neutral-800 !important;
+    border-color: $color-neutral-700 !important;
+  }
+
+  .header__hamburger-line {
+    background: $color-neutral-200;
+  }
+
+  .header__logo {
+    color: $color-primary-400;
+  }
+
+  .sidebar__brand {
+    color: $color-primary-400;
+  }
+
+  .sidebar__link {
+    color: $color-neutral-300;
+    &:hover {
+      background-color: $color-neutral-700;
+      color: $color-primary-300;
+    }
+  }
+
+  .sidebar__user {
+    color: $color-neutral-500;
+  }
+
+  .sidebar__logout {
+    color: $color-neutral-400;
+    border-color: $color-neutral-600;
+    &:hover {
+      color: $color-danger-500;
+      border-color: $color-danger-500;
+      background-color: rgba(231, 76, 60, 0.1);
+    }
+  }
+
+  // Objectifs
+  .objectifs__stats,
+  .stat-card {
+    background: $color-neutral-800;
+    color: $color-neutral-100;
+  }
+
+  .filter-btn {
+    background: $color-neutral-800;
+    color: $color-neutral-300;
+    &:hover,
+    &--active {
+      background: $color-primary-700;
+      color: white;
+    }
+  }
+
+  .objectif-card {
+    background: $color-neutral-800;
+    border-color: $color-neutral-700;
+  }
+
+  .modal {
+    background: $color-neutral-800;
+    color: $color-neutral-100;
+  }
+
+  .modal__header {
+    border-color: $color-neutral-700;
+  }
+
+  .modal__body {
+    .form-group label {
+      color: $color-neutral-300;
+    }
+    input,
+    textarea,
+    select {
+      background: $color-neutral-700;
+      border-color: $color-neutral-600;
+      color: $color-neutral-100;
+    }
+  }
+
+  // Journal
+  .journal {
+    background: transparent;
+    color: $color-neutral-100;
+  }
+
+  .journal__title {
+    color: $color-neutral-100;
+  }
+
+  .slider-row__label {
+    color: $color-neutral-300;
+  }
+
+  input[type='range'] {
+    &::-webkit-slider-track {
+      background: $color-neutral-700;
+    }
+    &::-webkit-slider-thumb {
+      background: $color-primary-400;
+    }
+  }
+
+  .notes-textarea {
+    background: $color-neutral-800;
+    color: $color-neutral-100;
+    border-color: $color-neutral-700;
+  }
+
+  // Personnage
+  .hero-card {
+    background: $color-neutral-800;
+    color: $color-neutral-100;
+  }
+
+  .xp-section {
+    background: $color-neutral-800;
+    color: $color-neutral-100;
+  }
+
+  .disciplines-section {
+    background: transparent;
+  }
+
+  .section-title {
+    color: $color-neutral-100;
+  }
+
+  .disc-card {
+    background: $color-neutral-800;
+    border-color: $color-neutral-700;
+  }
+
+  // EDT
+  .edt {
+    background: transparent;
+    color: $color-neutral-100;
+  }
+
+  .edt__title {
+    color: $color-neutral-100;
+  }
+
+  .day-column {
+    background: $color-neutral-800;
+    border-color: $color-neutral-700;
+  }
+
+  .day-column--today {
+    border-color: $color-primary-500;
+  }
+
+  // Chat
+  .chat {
+    background: $color-neutral-950;
+    color: $color-neutral-100;
+  }
+}

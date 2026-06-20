@@ -1,0 +1,4 @@
+<app-dashboard-header (toggleSidebar)="toggleSidebar()" />
+<app-dashboard-sidebar [isOpen]="isSidebarOpen()" (close)="closeSidebar()" />
+<main class="dashboard-content"><router-outlet /></main>
+<app-chat class="dashboard-chat" />

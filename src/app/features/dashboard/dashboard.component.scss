@@ -1,0 +1,4 @@
+@use "../../../styles/variables" as *;
+:host { display: flex; flex-direction: column; flex: 1; min-height: 0; position: relative; }
+.dashboard-content { flex: 1; overflow-y: auto; }
+.dashboard-chat { position: fixed; bottom: 24px; right: 24px; width: 360px; max-width: calc(100vw - 48px); z-index: 300; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); border-radius: 16px; }

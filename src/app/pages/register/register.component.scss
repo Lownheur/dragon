@@ -1,0 +1,139 @@
+@use 'variables' as *;
+
+.auth-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  padding: $spacing-8 $spacing-4;
+  gap: $spacing-8;
+}
+
+.auth-layout__logo {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: #000;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+.auth-layout__card {
+  width: 100%;
+  max-width: 380px;
+  border: 1px solid #e5e5e5;
+  border-radius: $border-radius-lg;
+  padding: $spacing-8;
+  background: #fff;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-5;
+}
+
+.auth-form__title {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: #000;
+  margin: 0;
+}
+
+.auth-form__sub {
+  font-size: $font-size-sm;
+  color: #888;
+  margin: 0;
+  margin-top: -$spacing-3;
+}
+
+.auth-form__error {
+  background: #fff0f0;
+  border: 1px solid #fcc;
+  color: #c00;
+  border-radius: $border-radius-sm;
+  padding: $spacing-3 $spacing-4;
+  font-size: $font-size-sm;
+}
+
+.auth-form__fields {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-1;
+}
+
+.field__label {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.field__input {
+  border: 1px solid #e0e0e0;
+  border-radius: $border-radius-sm;
+  padding: $spacing-3;
+  font-size: $font-size-sm;
+  font-family: inherit;
+  color: #111;
+  outline: none;
+  transition: border-color 150ms;
+  width: 100%;
+  box-sizing: border-box;
+
+  &:focus {
+    border-color: #000;
+  }
+}
+
+.field__error {
+  font-size: $font-size-xs;
+  color: #c00;
+}
+
+.auth-form__submit {
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: $border-radius-sm;
+  padding: $spacing-3;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 150ms;
+  margin-top: $spacing-2;
+
+  &:hover:not(:disabled) {
+    background: #222;
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.auth-form__footer {
+  font-size: $font-size-sm;
+  color: #888;
+  text-align: center;
+  margin: 0;
+}
+
+.auth-form__link {
+  color: #000;
+  font-weight: $font-weight-medium;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

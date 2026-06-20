@@ -1,0 +1,29 @@
+@use 'variables' as *;
+
+.auth-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  padding: $spacing-8 $spacing-4;
+  gap: $spacing-8;
+}
+
+.auth-layout__logo {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: #000;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+.auth-layout__card {
+  width: 100%;
+  max-width: 380px;
+  border: 1px solid #e5e5e5;
+  border-radius: $border-radius-lg;
+  padding: $spacing-8;
+  background: #fff;
+}

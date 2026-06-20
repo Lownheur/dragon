@@ -1,0 +1,162 @@
+{
+  "app": {
+    "name": "Dragon Life OS",
+    "tagline": "Pilot your life like a dragon"
+  },
+  "nav": {
+    "edt": "Schedule",
+    "objectifs": "Objectives & Roadmaps",
+    "journal": "Daily Journal",
+    "personnage": "Character Sheet"
+  },
+  "header": {
+    "openMenu": "Open menu",
+    "openChat": "Open Grok chat",
+    "switchTheme": "Switch to dark mode",
+    "switchLang": "Switch to French"
+  },
+  "sidebar": {
+    "close": "Close menu",
+    "logout": "Log out"
+  },
+  "edt": {
+    "title": "📅 Schedule",
+    "today": "Today",
+    "prevWeek": "Previous week",
+    "nextWeek": "Next week",
+    "addEvent": "Add event",
+    "noEvents": "No events this week",
+    "deleteEvent": "Delete",
+    "eventTypes": {
+      "sport": "Sport",
+      "work": "Work",
+      "food": "Food",
+      "sleep": "Sleep",
+      "travel": "Travel",
+      "study": "Study",
+      "social": "Social",
+      "health": "Health",
+      "other": "Other"
+    },
+    "form": {
+      "title": "Title *",
+      "description": "Description",
+      "type": "Type",
+      "date": "Date",
+      "startTime": "Start time",
+      "endTime": "End time",
+      "create": "Create",
+      "cancel": "Cancel"
+    }
+  },
+  "objectifs": {
+    "title": "🎯 Objectives & Roadmaps",
+    "newObjective": "New objective",
+    "stats": {
+      "total": "Total",
+      "inProgress": "In progress",
+      "done": "Done",
+      "completionRate": "Completed"
+    },
+    "filters": {
+      "all": "All",
+      "pending": "To do",
+      "in_progress": "In progress",
+      "done": "Done",
+      "abandoned": "Abandoned"
+    },
+    "priorities": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "critical": "Critical"
+    },
+    "form": {
+      "title": "Title *",
+      "description": "Description",
+      "priority": "Priority",
+      "deadline": "Deadline",
+      "xpReward": "XP Reward",
+      "tags": "Tags (comma separated)",
+      "create": "Create",
+      "cancel": "Cancel"
+    },
+    "empty": "No objectives yet. Add one! 🎯"
+  },
+  "journal": {
+    "title": "📔 Daily Journal",
+    "save": "Save",
+    "saving": "Saving...",
+    "saved": "✓ Today's indicators loaded",
+    "mood": "Mood",
+    "energy": "Energy",
+    "stress": "Stress",
+    "sleep": "Sleep",
+    "sleepQuality": "Sleep quality",
+    "sleepHours": "Hours of sleep",
+    "water": "Water (liters)",
+    "exercise": "Exercise (minutes)",
+    "screenTime": "Screen time (minutes)",
+    "notes": "Notes",
+    "notesPlaceholder": "How was your day?...",
+    "labels": {
+      "excellent": "Excellent",
+      "good": "Good",
+      "average": "Average",
+      "low": "Low",
+      "energetic": "Energetic",
+      "normal": "Normal",
+      "tired": "Tired",
+      "veryStressed": "Very Stressed",
+      "moderate": "Moderate",
+      "calm": "Calm",
+      "sufficient": "✓ Sufficient",
+      "average2": "⚠ Average",
+      "insufficient": "✗ Insufficient"
+    }
+  },
+  "personnage": {
+    "title": "🧙 Character Sheet",
+    "loading": "Loading character...",
+    "xp": "XP",
+    "xpToNext": "XP to level {{level}}",
+    "streak": "day(s) streak",
+    "record": "Record",
+    "disciplines": "📊 Disciplines",
+    "totalXp": "Total XP Collected",
+    "levels": {
+      "lvl1": "🐣 Dragon Hatchling",
+      "lvl2": "🐉 Young Dragon",
+      "lvl3": "🔥 Hungry Dragon",
+      "lvl4": "⚔️ Warrior Dragon",
+      "lvl5": "👑 Noble Dragon",
+      "lvl6": "🌟 Legendary Dragon"
+    }
+  },
+  "chat": {
+    "title": "🐉 Grok AI",
+    "clear": "Clear",
+    "placeholder": "Ex: Plan my week, I want to run 3 times...",
+    "empty": "Tell me what you want to accomplish today! 💪",
+    "error": "Grok connection error. Check your API key."
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "logout": "Log out",
+    "email": "Email",
+    "password": "Password",
+    "noAccount": "No account yet?",
+    "hasAccount": "Already have an account?",
+    "signUp": "Sign up",
+    "signIn": "Sign in"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "loading": "Loading..."
+  }
+}

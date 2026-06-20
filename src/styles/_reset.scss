@@ -1,0 +1,139 @@
+// ============================================================
+// DRAGON DESIGN SYSTEM — RESET CSS MODERNE
+// ============================================================
+
+// box-sizing global
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// supprime les marges et paddings par défaut
+* {
+  margin: 0;
+  padding: 0;
+}
+
+// empêche le débordement horizontal
+html,
+body {
+  overflow-x: hidden;
+}
+
+// base du document
+html {
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+  tab-size: 4;
+}
+
+// corps — hauteur minimale plein écran
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  line-height: 1.5;
+}
+
+// images et médias responsive par défaut
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+// hérite la police pour les éléments de formulaire
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+// reset du style des boutons
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+// liens sans soulignement par défaut
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+// listes sans puces par défaut
+ul,
+ol {
+  list-style: none;
+}
+
+// tableaux — collapse les bordures
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+// typo — empêche le débordement de texte
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+// éléments de formulaire
+fieldset {
+  border: none;
+}
+
+// focus visible — accessibilité
+:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+// supprime le focus sur les éléments non-interactifs
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+// scrollbar custom (webkit)
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+}
+
+// selection de texte
+::selection {
+  background-color: hsl(262, 60%, 50%);
+  color: white;
+}

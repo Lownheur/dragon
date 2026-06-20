@@ -1,0 +1,28 @@
+<div class="hero">
+  <nav class="hero__nav">
+    <div class="hero__logo">Dragon</div>
+    <div class="hero__nav-actions">
+      @if (authService.isAuthenticated()) {
+        <a routerLink="/dashboard" class="btn-link btn-link--primary">Dashboard</a>
+      } @else {
+        <a routerLink="/login" class="btn-link">Connexion</a>
+        <a routerLink="/register" class="btn-link btn-link--primary">S'inscrire</a>
+      }
+    </div>
+  </nav>
+
+  <main class="hero__main">
+    <h1 class="hero__title">Votre emploi du temps,<br /><span>simple et efficace.</span></h1>
+    <p class="hero__sub">
+      Planifiez votre semaine. Cochez ce que vous avez fait. Le reste disparaît.
+    </p>
+    <div class="hero__actions">
+      @if (authService.isAuthenticated()) {
+        <a routerLink="/dashboard" class="btn-primary">Accéder</a>
+      } @else {
+        <a routerLink="/register" class="btn-primary">Commencer gratuitement</a>
+        <a routerLink="/login" class="btn-ghost">Se connecter</a>
+      }
+    </div>
+  </main>
+</div>

@@ -1,0 +1,14 @@
+<div class="auth-layout">
+  <a routerLink="/hero" class="auth-layout__logo">Dragon</a>
+  <div class="auth-layout__card">
+    <div class="auth-form">
+      <app-login-header />
+      <app-login-form
+        [isSubmitting]="isSubmitting()"
+        [errorMessage]="errorMessage()"
+        (formSubmit)="onLogin($event)"
+      />
+      <app-login-footer />
+    </div>
+  </div>
+</div>

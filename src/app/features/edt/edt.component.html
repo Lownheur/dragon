@@ -1,0 +1,124 @@
+<div class="edt">
+  <div class="edt__header">
+    <h1 class="edt__title">📅 Emploi du Temps</h1>
+    <div class="edt__nav">
+      <button class="btn btn--secondary" (click)="prevWeek()">← Préc</button>
+      <button class="btn btn--primary" (click)="goToday()">Aujourd'hui</button>
+      <button class="btn btn--secondary" (click)="nextWeek()">Suiv →</button>
+    </div>
+    <span class="edt__range">{{ formatWeekRange() }}</span>
+  </div>
+
+  <div class="edt__grid">
+    <!-- Time column -->
+    <div class="edt__time-col">
+      <div class="edt__day-header"></div>
+      @for (hour of hours; track hour) {
+        <div class="edt__time-slot">{{ hour }}h</div>
+      }
+    </div>
+
+    <!-- Day columns -->
+    @for (slot of weekSlots(); track slot.date.toISOString()) {
+      <div class="edt__day-col" [class.edt__day-col--today]="isToday(slot.date)">
+        <div class="edt__day-header">
+          <span class="edt__day-name">{{ slot.shortLabel }}</span>
+          <span class="edt__day-num" [class.edt__day-num--today]="isToday(slot.date)">{{ getDayNumber(slot.date) }}</span>
+        </div>
+        <div class="edt__day-body" (dblclick)="openCreate(slot)">
+          @for (hour of hours; track hour) {
+            <div class="edt__hour-cell"></div>
+          }
+          @for (evt of slot.evenements; track evt.id) {
+            <div
+              class="edt__event"
+              [style]="getEventStyle(evt)"
+              (click)="openEvent(evt)"
+            >
+              <span class="edt__event-title">{{ evt.title }}</span>
+              @if (evt.allDay) {
+                <span class="edt__event-badge">Toute la journée</span>
+              } @else {
+                <span class="edt__event-time">{{ formatTime(evt.startTime) }}</span>
+              }
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+
+  <p class="edt__hint">Double-clique sur un jour pour créer un événement</p>
+</div>
+
+<!-- Event Detail Modal -->
+@if (showEventModal()) {
+  <div class="modal-overlay" (click)="closeEventModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <div class="modal__header">
+        <h2>{{ selectedEvent()!.title }}</h2>
+        <button class="modal__close" (click)="closeEventModal()">×</button>
+      </div>
+      <div class="modal__body">
+        <p><strong>Type:</strong> {{ selectedEvent()!.type }}</p>
+        <p><strong>Début:</strong> {{ formatTime(selectedEvent()!.startTime) }}</p>
+        <p><strong>Fin:</strong> {{ formatTime(selectedEvent()!.endTime) }}</p>
+        @if (selectedEvent()!.description) {
+          <p><strong>Description:</strong> {{ selectedEvent()!.description }}</p>
+        }
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--danger" (click)="deleteEvent(selectedEvent()!.id)">Supprimer</button>
+        <button class="btn btn--secondary" (click)="closeEventModal()">Fermer</button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- Create Event Modal -->
+@if (showCreateModal()) {
+  <div class="modal-overlay" (click)="showCreateModal.set(false)">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <div class="modal__header">
+        <h2>Nouvel événement</h2>
+        <button class="modal__close" (click)="showCreateModal.set(false)">×</button>
+      </div>
+      <div class="modal__body">
+        <div class="form-group">
+          <label>Titre</label>
+          <input type="text" [(ngModel)]="newEvent.title" placeholder="Titre de l'événement" />
+        </div>
+        <div class="form-group">
+          <label>Type</label>
+          <select [(ngModel)]="newEvent.type" (ngModelChange)="onTypeChange()">
+            @for (t of types; track t.value) {
+              <option [value]="t.value">{{ t.label }}</option>
+            }
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" [(ngModel)]="newEvent.date" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Début</label>
+            <input type="time" [(ngModel)]="newEvent.startTime" />
+          </div>
+          <div class="form-group">
+            <label>Fin</label>
+            <input type="time" [(ngModel)]="newEvent.endTime" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea [(ngModel)]="newEvent.description" placeholder="Description optionnelle"></textarea>
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--primary" (click)="createEvent()">Créer</button>
+        <button class="btn btn--secondary" (click)="showCreateModal.set(false)">Annuler</button>
+      </div>
+    </div>
+  </div>
+}

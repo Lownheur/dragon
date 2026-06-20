@@ -1,0 +1,126 @@
+@use 'variables' as *;
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  color: #000;
+  padding: 0 $spacing-8;
+}
+
+.hero__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.hero__logo {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  letter-spacing: -0.02em;
+}
+
+.hero__nav-actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-4;
+}
+
+.btn-link {
+  font-size: $font-size-sm;
+  color: #666;
+  text-decoration: none;
+  transition: color 150ms;
+
+  &:hover {
+    color: #000;
+  }
+
+  &--primary {
+    color: #000;
+    font-weight: $font-weight-medium;
+    border: 1px solid #000;
+    padding: $spacing-2 $spacing-4;
+    border-radius: $border-radius-sm;
+
+    &:hover {
+      background: #000;
+      color: #fff;
+    }
+  }
+}
+
+.hero__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: $spacing-20 0;
+  width: 100%;
+}
+
+.hero__title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: $font-weight-extrabold;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: #000;
+  margin: 0 0 $spacing-5;
+
+  span {
+    color: #666;
+  }
+}
+
+.hero__sub {
+  font-size: $font-size-lg;
+  color: #666;
+  margin: 0 0 $spacing-8;
+  line-height: 1.6;
+}
+
+.hero__actions {
+  display: flex;
+  gap: $spacing-3;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: #000;
+  color: #fff;
+  padding: $spacing-3 $spacing-6;
+  border-radius: $border-radius-sm;
+  text-decoration: none;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  transition: background 150ms;
+
+  &:hover {
+    background: #222;
+  }
+}
+
+.btn-ghost {
+  background: none;
+  color: #333;
+  border: 1px solid #ddd;
+  padding: $spacing-3 $spacing-6;
+  border-radius: $border-radius-sm;
+  text-decoration: none;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  transition:
+    border-color 150ms,
+    color 150ms;
+
+  &:hover {
+    border-color: #000;
+    color: #000;
+  }
+}

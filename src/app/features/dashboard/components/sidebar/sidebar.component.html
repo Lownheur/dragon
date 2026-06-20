@@ -1,0 +1,39 @@
+<!-- Backdrop overlay -->
+@if (isOpen()) {
+  <div class="sidebar-backdrop" (click)="onBackdropClick()"></div>
+}
+
+<!-- Sidebar panel -->
+<aside class="sidebar" [class.sidebar--open]="isOpen()">
+  <!-- Header with app name and close button -->
+  <div class="sidebar__head">
+    <span class="sidebar__brand">{{ t('app.name') }}</span>
+    <button class="sidebar__close" (click)="onClose()" [attr.aria-label]="t('sidebar.close')">
+      <span class="sidebar__close-icon">×</span>
+    </button>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="sidebar__nav">
+    <a class="sidebar__link" routerLink="/dashboard/edt" (click)="close.emit()">
+      <span>📅</span> {{ t('nav.edt') }}
+    </a>
+    <a class="sidebar__link" routerLink="/dashboard/objectifs" (click)="close.emit()">
+      <span>🎯</span> {{ t('nav.objectifs') }}
+    </a>
+    <a class="sidebar__link" routerLink="/dashboard/journal" (click)="close.emit()">
+      <span>📔</span> {{ t('nav.journal') }}
+    </a>
+    <a class="sidebar__link" routerLink="/dashboard/personnage" (click)="close.emit()">
+      <span>🧙</span> {{ t('nav.personnage') }}
+    </a>
+  </nav>
+
+  <!-- Footer with user info & logout -->
+  <div class="sidebar__footer">
+    @if (userEmail) {
+      <span class="sidebar__user">{{ userEmail }}</span>
+    }
+    <button class="sidebar__logout" (click)="onLogout()">{{ t('sidebar.logout') }}</button>
+  </div>
+</aside>

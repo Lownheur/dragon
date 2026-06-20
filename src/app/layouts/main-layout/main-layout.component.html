@@ -1,0 +1,14 @@
+<app-dashboard-header (toggleSidebar)="toggleSidebar()" (toggleChat)="toggleChat()" />
+
+<app-dashboard-sidebar [isOpen]="isSidebarOpen()" (close)="closeSidebar()" />
+
+<main class="main-layout__content">
+  <router-outlet />
+</main>
+
+<!-- Floating Chat Panel -->
+@if (isChatOpen()) {
+  <div class="chat-panel">
+    <app-chat />
+  </div>
+}

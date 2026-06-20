@@ -1,0 +1,162 @@
+{
+  "app": {
+    "name": "Dragon Life OS",
+    "tagline": "Pilote ta vie comme un dragon"
+  },
+  "nav": {
+    "edt": "Emploi du Temps",
+    "objectifs": "Objectifs & Roadmaps",
+    "journal": "Journal du Jour",
+    "personnage": "Feuille de Perso"
+  },
+  "header": {
+    "openMenu": "Ouvrir le menu",
+    "openChat": "Ouvrir le chat Grok",
+    "switchTheme": "Passer en mode sombre",
+    "switchLang": "Passer en anglais"
+  },
+  "sidebar": {
+    "close": "Fermer le menu",
+    "logout": "Déconnexion"
+  },
+  "edt": {
+    "title": "📅 Emploi du Temps",
+    "today": "Aujourd'hui",
+    "prevWeek": "Semaine précédente",
+    "nextWeek": "Semaine suivante",
+    "addEvent": "Ajouter un événement",
+    "noEvents": "Aucun événement cette semaine",
+    "deleteEvent": "Supprimer",
+    "eventTypes": {
+      "sport": "Sport",
+      "work": "Travail",
+      "food": "Alimentation",
+      "sleep": "Sommeil",
+      "travel": "Trajets",
+      "study": "Études",
+      "social": "Social",
+      "health": "Santé",
+      "other": "Autre"
+    },
+    "form": {
+      "title": "Titre *",
+      "description": "Description",
+      "type": "Type",
+      "date": "Date",
+      "startTime": "Heure de début",
+      "endTime": "Heure de fin",
+      "create": "Créer",
+      "cancel": "Annuler"
+    }
+  },
+  "objectifs": {
+    "title": "🎯 Objectifs & Roadmaps",
+    "newObjective": "Nouvel objectif",
+    "stats": {
+      "total": "Total",
+      "inProgress": "En cours",
+      "done": "Terminés",
+      "completionRate": "Complétés"
+    },
+    "filters": {
+      "all": "Tous",
+      "pending": "À faire",
+      "in_progress": "En cours",
+      "done": "Terminé",
+      "abandoned": "Abandonné"
+    },
+    "priorities": {
+      "low": "Basse",
+      "medium": "Moyenne",
+      "high": "Haute",
+      "critical": "Critique"
+    },
+    "form": {
+      "title": "Titre *",
+      "description": "Description",
+      "priority": "Priorité",
+      "deadline": "Deadline",
+      "xpReward": "XP Récompense",
+      "tags": "Tags (séparés par virgule)",
+      "create": "Créer",
+      "cancel": "Annuler"
+    },
+    "empty": "Aucun objectif pour le moment. Ajoute-en un ! 🎯"
+  },
+  "journal": {
+    "title": "📔 Journal du Jour",
+    "save": "Sauvegarder",
+    "saving": "Sauvegarde...",
+    "saved": "✓ Indicateurs du jour chargés",
+    "mood": "Humeur",
+    "energy": "Énergie",
+    "stress": "Stress",
+    "sleep": "Sommeil",
+    "sleepQuality": "Qualité du sommeil",
+    "sleepHours": "Heures de sommeil",
+    "water": "Eau (litres)",
+    "exercise": "Exercice (minutes)",
+    "screenTime": "Écran (minutes)",
+    "notes": "Notes",
+    "notesPlaceholder": "Comment s'est passée ta journée ?...",
+    "labels": {
+      "excellent": "Excellent",
+      "good": "Bien",
+      "average": "Moyen",
+      "low": "Bas",
+      "energetic": "Énergique",
+      "normal": "Normal",
+      "tired": "Fatigué",
+      "veryStressed": "Très Stressé",
+      "moderate": "Modéré",
+      "calm": "Calme",
+      "sufficient": "✓ Suffisant",
+      "average2": "⚠ Moyen",
+      "insufficient": "✗ Insuffisant"
+    }
+  },
+  "personnage": {
+    "title": "🧙 Feuille de Perso",
+    "loading": "Chargement du personnage...",
+    "xp": "XP",
+    "xpToNext": "XP pour le niveau {{level}}",
+    "streak": "jour(s) de série",
+    "record": "Record",
+    "disciplines": "📊 Disciplines",
+    "totalXp": "Total XP Collected",
+    "levels": {
+      "lvl1": "🐣 Nourrisson Dragon",
+      "lvl2": "🐉 Dragonnet",
+      "lvl3": "🔥 Dragon Affamé",
+      "lvl4": "⚔️ Dragon Guerrier",
+      "lvl5": "👑 Dragon Noble",
+      "lvl6": "🌟 Dragon Légendaire"
+    }
+  },
+  "chat": {
+    "title": "🐉 Grok AI",
+    "clear": "Effacer",
+    "placeholder": "Ex: Planifie ma semaine, je veux courir 3 fois...",
+    "empty": "Dis-moi ce que tu veux accomplir aujourd'hui ! 💪",
+    "error": "Erreur de connexion à Grok. Vérifie ta clé API."
+  },
+  "auth": {
+    "login": "Connexion",
+    "register": "Inscription",
+    "logout": "Déconnexion",
+    "email": "Email",
+    "password": "Mot de passe",
+    "noAccount": "Pas encore de compte ?",
+    "hasAccount": "Déjà un compte ?",
+    "signUp": "S'inscrire",
+    "signIn": "Se connecter"
+  },
+  "common": {
+    "save": "Sauvegarder",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "close": "Fermer",
+    "loading": "Chargement..."
+  }
+}

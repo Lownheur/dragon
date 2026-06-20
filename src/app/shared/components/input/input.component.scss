@@ -1,0 +1,150 @@
+@use 'variables' as *;
+
+// ============================================================
+// INPUT COMPONENT
+// ============================================================
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-1;
+  width: 100%;
+
+  // --------------------------------------------------------
+  // LABEL
+  // --------------------------------------------------------
+
+  &__label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-neutral-700;
+    transition: color $transition-fast;
+  }
+
+  // --------------------------------------------------------
+  // FIELD CONTAINER
+  // --------------------------------------------------------
+
+  &__field {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  // --------------------------------------------------------
+  // INPUT
+  // --------------------------------------------------------
+
+  &__input {
+    width: 100%;
+    height: 44px;
+    padding: $spacing-2 $spacing-4;
+    font-size: $font-size-base;
+    font-family: $font-family-sans;
+    color: $color-neutral-900;
+    background-color: $color-neutral-0;
+    border: $border-width-thin solid $color-neutral-300;
+    border-radius: $border-radius-md;
+    outline: none;
+    transition: all $transition-base;
+
+    &::placeholder {
+      color: $color-neutral-400;
+    }
+
+    &:focus {
+      border-color: $color-primary-400;
+      box-shadow: 0 0 0 3px rgba($color-primary-500, 0.12);
+    }
+
+    &:disabled {
+      background-color: $color-neutral-100;
+      color: $color-neutral-400;
+      cursor: not-allowed;
+    }
+  }
+
+  // --------------------------------------------------------
+  // PASSWORD TOGGLE
+  // --------------------------------------------------------
+
+  &__toggle {
+    position: absolute;
+    right: $spacing-3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-1;
+    color: $color-neutral-400;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: $border-radius-sm;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $color-neutral-600;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-primary-400;
+      outline-offset: 2px;
+    }
+
+    svg {
+      display: block;
+    }
+  }
+
+  // password input avec le toggle a besoin de padding à droite
+  &__field:has(.input-wrapper__toggle) .input-wrapper__input {
+    padding-right: $spacing-12;
+  }
+
+  // --------------------------------------------------------
+  // HINT & ERROR
+  // --------------------------------------------------------
+
+  &__hint {
+    font-size: $font-size-xs;
+    color: $color-neutral-400;
+    margin-top: $spacing-1;
+  }
+
+  &__error {
+    font-size: $font-size-xs;
+    color: $color-danger-500;
+    margin-top: $spacing-1;
+    animation: fade-in-up 200ms ease;
+  }
+
+  // --------------------------------------------------------
+  // ÉTATS
+  // --------------------------------------------------------
+
+  &--focused {
+    .input-wrapper__label {
+      color: $color-primary-500;
+    }
+  }
+
+  &--error {
+    .input-wrapper__input {
+      border-color: $color-danger-500;
+
+      &:focus {
+        box-shadow: 0 0 0 3px rgba($color-danger-500, 0.12);
+      }
+    }
+
+    .input-wrapper__label {
+      color: $color-danger-500;
+    }
+  }
+
+  &--disabled {
+    .input-wrapper__label {
+      color: $color-neutral-400;
+    }
+  }
+}

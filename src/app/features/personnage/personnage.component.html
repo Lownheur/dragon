@@ -1,0 +1,88 @@
+<div class="personnage">
+  @if (personnage(); as p) {
+    <!-- Hero Card -->
+    <div class="hero-card">
+      <div class="hero-card__bg"></div>
+      <div class="hero-card__content">
+        <div class="hero-card__avatar">
+          <span class="avatar-emoji">🐉</span>
+          <span class="level-badge">{{ p.level }}</span>
+        </div>
+        <div class="hero-card__info">
+          @if (editingName()) {
+            <div class="name-edit">
+              <input
+                type="text"
+                [value]="nameInput()"
+                (input)="nameInput.set($any($event.target).value)"
+                class="name-input"
+                (keyup.enter)="saveName()"
+              />
+              <button class="btn btn--sm btn--primary" (click)="saveName()">OK</button>
+            </div>
+          } @else {
+            <h1 class="hero-name" (click)="startEditName()">{{ p.name }} ✏️</h1>
+          }
+          <p class="hero-title">{{ levelTitle() }}</p>
+          <p class="hero-stats">
+            🔥 {{ p.streakDays }} jour(s) de série
+            &nbsp;|&nbsp;
+            🏆 Record: {{ p.longestStreak }} jours
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- XP Bar -->
+    <div class="xp-section">
+      <div class="xp-header">
+        <span>⭐ XP — Niveau {{ p.level }}</span>
+        <span>{{ p.xp }} / {{ totalXpNeeded() }} XP</span>
+      </div>
+      <div class="xp-bar">
+        <div
+          class="xp-bar__fill"
+          [style.width.%]="xpProgress()"
+          [style.background]="barColor()"
+        ></div>
+      </div>
+      <p class="xp-hint">💡 {{ totalXpNeeded() - p.xp }} XP pour le niveau {{ p.level + 1 }}</p>
+    </div>
+
+    <!-- Discipline Stats -->
+    <div class="disciplines-section">
+      <h2 class="section-title">📊 Disciplines</h2>
+      <div class="disciplines-grid">
+        @for (disc of disciplineStats(); track disc.id) {
+          <div class="disc-card">
+            <div class="disc-card__header">
+              <span class="disc-icon">{{ disc.icon }}</span>
+              <span class="disc-name">{{ disc.name }}</span>
+              <span class="disc-level">Nv.{{ disc.level }}</span>
+            </div>
+            <div class="disc-card__xp">
+              <div class="xp-mini-bar">
+                <div
+                  class="xp-mini-bar__fill"
+                  [style.width.%]="getDisciplineLevelProgress(disc)"
+                  [style.background]="disc.color"
+                ></div>
+              </div>
+              <span class="disc-xp">{{ disc.xp }} XP</span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Total XP Earned -->
+    <div class="total-section">
+      <div class="total-card">
+        <span class="total-label">Total XP Collected</span>
+        <span class="total-value">{{ p.totalXpEarned.toLocaleString() }}</span>
+      </div>
+    </div>
+  } @else {
+    <div class="loading">Chargement du personnage...</div>
+  }
+</div>

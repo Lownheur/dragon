@@ -1,0 +1,112 @@
+@use '../../../styles/variables' as *;
+
+.schedule {
+  padding: $spacing-6;
+  max-width: 720px;
+  margin: 0 auto;
+
+  &__header {
+    margin-bottom: $spacing-8;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: $spacing-4;
+  }
+
+  &__nav-btn {
+    background: $color-neutral-800;
+    border: 1px solid $color-neutral-700;
+    color: $color-neutral-200;
+    border-radius: $border-radius-md;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    font-size: $font-size-base;
+    transition: background $transition-fast;
+
+    &:hover { background: $color-neutral-700; }
+  }
+
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $color-neutral-100;
+    margin: 0;
+  }
+
+  &__subtitle {
+    font-size: $font-size-sm;
+    color: $color-neutral-500;
+    margin-top: $spacing-1;
+  }
+
+  &__blocks {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-3;
+  }
+
+  &__block {
+    display: flex;
+    align-items: center;
+    gap: $spacing-4;
+    padding: $spacing-4 $spacing-5;
+    background: $color-neutral-800;
+    border-radius: $border-radius-lg;
+    border-left: 4px solid $color-neutral-600;
+    transition: all $transition-base;
+
+    &--done {
+      opacity: 0.5;
+      .schedule__label { text-decoration: line-through; }
+    }
+
+    &--taf { border-left-color: $color-primary-500; }
+    &--sport { border-left-color: $color-success-500; }
+    &--alimentation { border-left-color: $color-warning-500; }
+    &--trajet { border-left-color: $color-info-500; }
+    &--sommeil { border-left-color: $color-secondary-500; }
+    &--perso { border-left-color: $color-primary-300; }
+  }
+
+  &__time {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-neutral-400;
+    min-width: 48px;
+    font-family: $font-family-mono;
+  }
+
+  &__label {
+    flex: 1;
+    font-size: $font-size-base;
+    color: $color-neutral-100;
+  }
+
+  &__check {
+    background: $color-neutral-700;
+    border: 2px solid $color-neutral-600;
+    color: $color-neutral-500;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: $font-size-sm;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all $transition-fast;
+
+    &--done {
+      background: $color-success-600;
+      border-color: $color-success-500;
+      color: white;
+    }
+
+    &:hover:not(.schedule__check--done) {
+      border-color: $color-primary-500;
+    }
+  }
+}

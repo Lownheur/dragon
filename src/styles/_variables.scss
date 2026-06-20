@@ -1,0 +1,195 @@
+// ============================================================
+// DRAGON DESIGN SYSTEM — VARIABLES
+// ============================================================
+
+// ------------------------------------------------------------
+// COULEURS
+// ------------------------------------------------------------
+
+// primaire — violet profond
+$color-primary-50: hsl(262, 80%, 96%);
+$color-primary-100: hsl(262, 78%, 90%);
+$color-primary-200: hsl(262, 72%, 80%);
+$color-primary-300: hsl(262, 68%, 70%);
+$color-primary-400: hsl(262, 65%, 60%);
+$color-primary-500: hsl(262, 60%, 50%); // base
+$color-primary-600: hsl(262, 62%, 42%);
+$color-primary-700: hsl(262, 64%, 34%);
+$color-primary-800: hsl(262, 66%, 26%);
+$color-primary-900: hsl(262, 70%, 18%);
+
+// secondaire — cyan / teal
+$color-secondary-50: hsl(185, 80%, 96%);
+$color-secondary-100: hsl(185, 75%, 88%);
+$color-secondary-200: hsl(185, 70%, 76%);
+$color-secondary-300: hsl(185, 65%, 64%);
+$color-secondary-400: hsl(185, 60%, 52%);
+$color-secondary-500: hsl(185, 62%, 42%); // base
+$color-secondary-600: hsl(185, 64%, 34%);
+$color-secondary-700: hsl(185, 66%, 26%);
+$color-secondary-800: hsl(185, 68%, 18%);
+$color-secondary-900: hsl(185, 70%, 12%);
+
+// neutres — gris bleutés
+$color-neutral-0: hsl(0, 0%, 100%); // blanc
+$color-neutral-50: hsl(220, 20%, 97%);
+$color-neutral-100: hsl(220, 18%, 93%);
+$color-neutral-200: hsl(220, 16%, 86%);
+$color-neutral-300: hsl(220, 14%, 74%);
+$color-neutral-400: hsl(220, 12%, 58%);
+$color-neutral-500: hsl(220, 10%, 46%);
+$color-neutral-600: hsl(220, 12%, 34%);
+$color-neutral-700: hsl(220, 14%, 24%);
+$color-neutral-800: hsl(220, 18%, 16%);
+$color-neutral-900: hsl(220, 22%, 10%);
+$color-neutral-950: hsl(220, 26%, 6%); // quasi-noir
+
+// sémantiques
+$color-success-50: hsl(152, 70%, 94%);
+$color-success-500: hsl(152, 60%, 40%);
+$color-success-600: hsl(152, 62%, 32%);
+
+$color-warning-50: hsl(40, 90%, 94%);
+$color-warning-500: hsl(40, 85%, 50%);
+$color-warning-600: hsl(40, 80%, 42%);
+
+$color-danger-50: hsl(0, 80%, 96%);
+$color-danger-300: hsl(0, 65%, 62%);
+$color-danger-400: hsl(0, 68%, 57%);
+$color-danger-500: hsl(0, 72%, 52%);
+$color-danger-600: hsl(0, 74%, 44%);
+
+$color-info-50: hsl(210, 80%, 96%);
+$color-info-500: hsl(210, 70%, 50%);
+$color-info-600: hsl(210, 72%, 42%);
+
+// ------------------------------------------------------------
+// TYPOGRAPHIE
+// ------------------------------------------------------------
+
+$font-family-sans:
+  'Inter',
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  Roboto,
+  sans-serif;
+$font-family-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+// échelle typographique (major third — 1.25)
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-base: 1rem; // 16px
+$font-size-md: 1.125rem; // 18px
+$font-size-lg: 1.25rem; // 20px
+$font-size-xl: 1.5rem; // 24px
+$font-size-2xl: 1.875rem; // 30px
+$font-size-3xl: 2.25rem; // 36px
+$font-size-4xl: 3rem; // 48px
+$font-size-5xl: 3.75rem; // 60px
+
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+$line-height-tight: 1.2;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.75;
+
+$letter-spacing-tight: -0.025em;
+$letter-spacing-normal: 0;
+$letter-spacing-wide: 0.025em;
+$letter-spacing-wider: 0.05em;
+
+// ------------------------------------------------------------
+// ESPACEMENT
+// ------------------------------------------------------------
+
+$spacing-0: 0;
+$spacing-1: 0.25rem; // 4px
+$spacing-2: 0.5rem; // 8px
+$spacing-3: 0.75rem; // 12px
+$spacing-4: 1rem; // 16px
+$spacing-5: 1.25rem; // 20px
+$spacing-6: 1.5rem; // 24px
+$spacing-8: 2rem; // 32px
+$spacing-10: 2.5rem; // 40px
+$spacing-12: 3rem; // 48px
+$spacing-16: 4rem; // 64px
+$spacing-20: 5rem; // 80px
+$spacing-24: 6rem; // 96px
+
+// ------------------------------------------------------------
+// BORDURES
+// ------------------------------------------------------------
+
+$border-radius-none: 0;
+$border-radius-sm: 0.25rem; // 4px
+$border-radius-md: 0.5rem; // 8px
+$border-radius-lg: 0.75rem; // 12px
+$border-radius-xl: 1rem; // 16px
+$border-radius-2xl: 1.5rem; // 24px
+$border-radius-full: 9999px;
+
+$border-width-thin: 1px;
+$border-width-medium: 2px;
+$border-width-thick: 3px;
+
+// ------------------------------------------------------------
+// OMBRES
+// ------------------------------------------------------------
+
+$shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-sm:
+  0 1px 3px 0 rgba(0, 0, 0, 0.1),
+  0 1px 2px -1px rgba(0, 0, 0, 0.1);
+$shadow-md:
+  0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  0 2px 4px -2px rgba(0, 0, 0, 0.1);
+$shadow-lg:
+  0 10px 15px -3px rgba(0, 0, 0, 0.1),
+  0 4px 6px -4px rgba(0, 0, 0, 0.1);
+$shadow-xl:
+  0 20px 25px -5px rgba(0, 0, 0, 0.1),
+  0 8px 10px -6px rgba(0, 0, 0, 0.1);
+$shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+$shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+
+// glow pour les effets premium
+$shadow-glow-primary: 0 0 20px rgba($color-primary-500, 0.3);
+$shadow-glow-secondary: 0 0 20px rgba($color-secondary-500, 0.3);
+
+// ------------------------------------------------------------
+// TRANSITIONS
+// ------------------------------------------------------------
+
+$transition-fast: 150ms ease;
+$transition-base: 250ms ease;
+$transition-slow: 350ms ease;
+$transition-spring: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+// ------------------------------------------------------------
+// BREAKPOINTS
+// ------------------------------------------------------------
+
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+// ------------------------------------------------------------
+// Z-INDEX
+// ------------------------------------------------------------
+
+$z-dropdown: 100;
+$z-sticky: 200;
+$z-fixed: 300;
+$z-modal-backdrop: 400;
+$z-modal: 500;
+$z-popover: 600;
+$z-tooltip: 700;
+$z-toast: 800;

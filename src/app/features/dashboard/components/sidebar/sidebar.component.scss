@@ -1,0 +1,163 @@
+@use 'variables' as *;
+
+// ---- Backdrop ----
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: $z-modal-backdrop;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: fadeIn 250ms ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// ---- Sidebar panel ----
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: $z-modal;
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  height: 100vh;
+  height: 100dvh;
+  background: $color-neutral-0;
+  border-right: 1px solid $color-neutral-100;
+  box-shadow: $shadow-xl;
+  transform: translateX(-100%);
+  transition: transform $transition-base;
+
+  &--open {
+    transform: translateX(0);
+  }
+
+  // ---- Head ----
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    padding: 0 $spacing-4;
+    border-bottom: 1px solid $color-neutral-100;
+  }
+
+  &__brand {
+    font-family: $font-family-sans;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $color-primary-500;
+    letter-spacing: $letter-spacing-tight;
+  }
+
+  &__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    border-radius: $border-radius-md;
+    cursor: pointer;
+    transition: background $transition-fast;
+
+    &:hover {
+      background: $color-neutral-50;
+    }
+    &:active {
+      background: $color-neutral-100;
+    }
+  }
+
+  &__close-icon {
+    font-size: $font-size-xl;
+    line-height: 1;
+    color: $color-neutral-500;
+  }
+
+  // ---- Nav ----
+  &__nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: $spacing-4;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-1;
+  }
+
+  // ---- Nav links ----
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: $spacing-3;
+    padding: $spacing-3 $spacing-3;
+    border-radius: $border-radius-md;
+    text-decoration: none;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-neutral-700;
+    transition: background $transition-fast, color $transition-fast;
+
+    &:hover {
+      background: $color-neutral-100;
+      color: $color-primary-600;
+    }
+
+    &-icon {
+      font-size: $font-size-base;
+    }
+  }
+
+  // ---- Footer ----
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-2;
+    padding: $spacing-4;
+    border-top: 1px solid $color-neutral-100;
+  }
+
+  &__user {
+    font-size: $font-size-xs;
+    color: $color-neutral-400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    padding: 0 $spacing-4;
+    font-family: $font-family-sans;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-neutral-600;
+    background: none;
+    border: 1px solid $color-neutral-200;
+    border-radius: $border-radius-md;
+    cursor: pointer;
+    transition:
+      border-color $transition-fast,
+      color $transition-fast,
+      background $transition-fast;
+
+    &:hover {
+      color: $color-danger-600;
+      border-color: $color-danger-500;
+      background: $color-danger-50;
+    }
+  }
+}

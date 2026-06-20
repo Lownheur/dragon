@@ -1,0 +1,130 @@
+.journal {
+  padding: 1.5rem;
+  max-width: 700px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  &__date-label {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  &__section {
+    background: #1e1e2e;
+    border-radius: 10px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid #2a2a3e;
+  }
+}
+
+.date-picker {
+  background: #2a2a3e;
+  border: 1px solid #3a3a4e;
+  border-radius: 6px;
+  color: #fff;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  &:focus { outline: none; border-color: #3498db; }
+}
+
+.saved-badge {
+  background: #27ae60;
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  color: #ccc;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sliders-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  &__label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-width: 140px;
+    font-size: 0.85rem;
+    color: #aaa;
+  }
+}
+
+.slider {
+  flex: 1;
+  accent-color: #3498db;
+  cursor: pointer;
+}
+
+.slider-val {
+  min-width: 52px;
+  text-align: right;
+  font-size: 0.85rem;
+  color: #3498db;
+  font-weight: 700;
+}
+
+.notes-textarea {
+  width: 100%;
+  background: #2a2a3e;
+  border: 1px solid #3a3a4e;
+  border-radius: 8px;
+  color: #fff;
+  padding: 0.75rem;
+  font-size: 0.9rem;
+  resize: vertical;
+  min-height: 120px;
+  box-sizing: border-box;
+  &:focus { outline: none; border-color: #3498db; }
+}
+
+.btn {
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: opacity 0.15s;
+
+  &--primary { background: #3498db; color: #fff; }
+  &--save {
+    width: 100%;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    padding: 0.75rem;
+  }
+  &:disabled { opacity: 0.6; cursor: not-allowed; }
+}
