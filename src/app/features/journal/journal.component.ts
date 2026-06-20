@@ -2,7 +2,7 @@ import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IndicateurService } from '../../core/services/indicateur.service';
-import { Indicateur } from '../../core/models/indicateur.model';
+import { I18nService } from '../../core/services/i18n.service';
 
 @Component({
   selector: 'app-journal',
@@ -13,9 +13,10 @@ import { Indicateur } from '../../core/models/indicateur.model';
 })
 export class JournalComponent implements OnInit {
   private readonly indicateurService = inject(IndicateurService);
+  readonly i18n = inject(I18nService);
 
   readonly today = computed(() =>
-    new Date().toLocaleDateString('fr-FR', {
+    new Date().toLocaleDateString(this.i18n.locale() === 'en' ? 'en-US' : 'fr-FR', {
       weekday: 'long',
       day: 'numeric',
       month: 'long',
@@ -38,6 +39,10 @@ export class JournalComponent implements OnInit {
     screenTime: 0,
     notes: '',
   };
+
+  t(key: string): string {
+    return this.i18n.t(key);
+  }
 
   async ngOnInit(): Promise<void> {
     const date = this.selectedDate();
@@ -72,29 +77,29 @@ export class JournalComponent implements OnInit {
 
   get moodLabel(): string {
     const m = this.form.mood;
-    if (m >= 8) return 'Excellent';
-    if (m >= 6) return 'Bien';
-    if (m >= 4) return 'Moyen';
-    return 'Bas';
+    if (m >= 8) return this.t('journal.labels.excellent');
+    if (m >= 6) return this.t('journal.labels.good');
+    if (m >= 4) return this.t('journal.labels.average');
+    return this.t('journal.labels.low');
   }
 
   get energyLabel(): string {
     const e = this.form.energy;
-    if (e >= 8) return 'Énergique';
-    if (e >= 5) return 'Normal';
-    return 'Fatigué';
+    if (e >= 8) return this.t('journal.labels.energetic');
+    if (e >= 5) return this.t('journal.labels.normal');
+    return this.t('journal.labels.tired');
   }
 
   get stressLabel(): string {
     const s = this.form.stress;
-    if (s >= 8) return 'Très Stressé';
-    if (s >= 5) return 'Modéré';
-    return 'Calme';
+    if (s >= 8) return this.t('journal.labels.veryStressed');
+    if (s >= 5) return this.t('journal.labels.moderate');
+    return this.t('journal.labels.calm');
   }
 
   get sleepLabel(): string {
-    if (this.form.sleepHours >= 8) return '✓ Suffisant';
-    if (this.form.sleepHours >= 6) return '⚠ Moyen';
-    return '✗ Insuffisant';
+    if (this.form.sleepHours >= 8) return this.t('journal.labels.sufficient');
+    if (this.form.sleepHours >= 6) return this.t('journal.labels.average2');
+    return this.t('journal.labels.insufficient');
   }
 }
